@@ -10,6 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.1",
+    "@mui/styled-engine-sc": "^5.0.0",
     "@reduxjs/toolkit": "1.5.1",
     "axios": "0.21.1",
     "date-fns": "2.21.1",
@@ -23,7 +28,8 @@
     "react-query": "3.13.11",
     "react-redux": "7.2.3",
     "redux": "4.0.5",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.12.0",
