@@ -7,3 +7,9 @@ export interface IAsyncState<T> {
   data: T;
   error?: any;
 }
+
+export interface IAsyncStateBI<T> {
+  items: T;
+  result_code: number;
+  result_msg: string;
+}

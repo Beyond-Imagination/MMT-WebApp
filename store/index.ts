@@ -1,10 +1,12 @@
 import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import todo from './todo';
+import tour from './tour';
 
 const store = configureStore({
   reducer: {
     todo: todo.reducer,
+    tour: tour.reducer,
   },
   middleware: [thunk],
 });

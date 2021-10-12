@@ -20,8 +20,8 @@ export default function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {current === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{ pl: 2, pr: 2, mt: 2 }}>
+          <div>{children}</div>
         </Box>
       )}
     </div>
