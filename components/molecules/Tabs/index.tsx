@@ -2,14 +2,14 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import * as React from 'react';
 
-interface TabsProps {
+interface ITabsProps {
   children?: React.ReactNode;
-  values: TabProps[];
+  values: ITabProps[];
   handleChange: any;
   current: number;
 }
 
-interface TabProps {
+interface ITabProps {
   id: number;
   title: string;
 }
@@ -21,7 +21,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs({ values, handleChange, current }: TabsProps) {
+export default function BasicTabs({ values, handleChange, current }: ITabsProps) {
   return (
     <Tabs
       value={current}
@@ -29,7 +29,6 @@ export default function BasicTabs({ values, handleChange, current }: TabsProps) 
       aria-label="basic tabs example"
       variant="scrollable"
       scrollButtons="auto"
-      centered
       TabIndicatorProps={{
         style: {
           background: '#233E8B',
@@ -39,7 +38,7 @@ export default function BasicTabs({ values, handleChange, current }: TabsProps) 
       }}
     >
       {values.map(tabValue => {
-        return <Tab label={tabValue.title} {...a11yProps(tabValue.id)} />;
+        return <Tab key={tabValue.id} label={tabValue.title} {...a11yProps(tabValue.id)} />;
       })}
     </Tabs>
   );
