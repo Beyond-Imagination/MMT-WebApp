@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import MapCard  from '../components/molecules/MapCard'
+import Storages from '../helpers/storages'
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -41,11 +42,11 @@ const testItem: IMapItem[] = [
 
 export default function MapScreen () {
   const [items, setItems] = useState(testItem)
-  
+
   const toggleShow = (item: IMapItem) => {
     const index = items.findIndex(x => x.id === item.id)
     item.show = !item.show
-
+  
     setItems([
       ...items.slice(0, index),
       item,
