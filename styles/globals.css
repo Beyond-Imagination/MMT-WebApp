@@ -27,3 +27,10 @@ a {
 .page {
     height: 94vh;
 }
+
+.tabpanel{
+    height: calc(100vh - 50px - 58px);
+    padding: 5px 0;
+    box-sizing: border-box;
+    overflow: scroll;
+}

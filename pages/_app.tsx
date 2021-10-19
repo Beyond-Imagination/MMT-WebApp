@@ -13,11 +13,14 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import store from '../store';
 import '../styles/globals.css';
+import { useEffect } from 'react';
+import { Link } from '@mui/material';
 
 const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('Home');
+  useEffect(() => {});
 
   return (
     <Provider store={store}>
@@ -34,10 +37,18 @@ function MyApp({ Component, pageProps }: AppProps) {
                 setValue(newValue);
               }}
             >
-              <BottomNavigationAction label="" icon={<HomeIcon />} />
-              <BottomNavigationAction label="" icon={<PhotoCameraIcon />} />
-              <BottomNavigationAction label="" icon={<PhotoLibraryIcon />} />
-              <BottomNavigationAction label="" icon={<SettingIcon />} />
+              <Link href="/">
+                <BottomNavigationAction value="home" label="" icon={<HomeIcon />} />
+              </Link>
+              <Link href="/tours">
+                <BottomNavigationAction value="tour" label="" icon={<PhotoCameraIcon />} />
+              </Link>
+              <Link href="/nft">
+                <BottomNavigationAction value="nft" label="" icon={<PhotoLibraryIcon />} />
+              </Link>
+              <Link href="/setting">
+                <BottomNavigationAction value="setting" label="" icon={<SettingIcon />} />
+              </Link>
             </BottomNavigation>
           </Paper>
         </Box>

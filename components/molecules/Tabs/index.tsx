@@ -2,14 +2,14 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import * as React from 'react';
 
-interface ITabsProps {
+export interface ITabsProps {
   children?: React.ReactNode;
   values: ITabProps[];
   handleChange: any;
   current: number;
 }
 
-interface ITabProps {
+export interface ITabProps {
   id: number;
   title: string;
 }
