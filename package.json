@@ -39,6 +39,7 @@
     "@testing-library/react": "11.2.6",
     "@testing-library/react-hooks": "5.1.2",
     "@types/jest": "26.0.22",
+    "@types/kakao-js-sdk": "^1.39.1",
     "@types/lodash-es": "4.17.4",
     "@types/react": "17.0.3",
     "@types/react-redux": "7.1.16",

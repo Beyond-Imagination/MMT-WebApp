@@ -1,22 +1,22 @@
-import { AppProps } from 'next/app'
-import { useEffect, useState } from 'react'
-import { Map, MapMarker } from 'react-kakao-maps-sdk'
-import MapCard  from '../components/molecules/MapCard'
-import Storages from '../helpers/storages'
+import { AppProps } from 'next/app';
+import { useEffect, useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import MapCard from '../components/molecules/MapCard';
+import Storages from '../hooks/useStorage';
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
-  border: 'none'
-}
+  border: 'none',
+};
 
 export interface IMapItem {
-  id: string
-  lat: number
-  lng: number
-  title: string
-  imageUrl: string
-  distance: string
-  show: boolean
+  id: string;
+  lat: number;
+  lng: number;
+  title: string;
+  imageUrl: string;
+  distance: string;
+  show: boolean;
 }
 
 const testItem: IMapItem[] = [
@@ -27,7 +27,7 @@ const testItem: IMapItem[] = [
     title: '경복궁 1',
     imageUrl: 'http://www.artinsight.co.kr/data/tmp/1804/79026ca47a77c48e37c1afb425b80566_RtxaVP4jOakhYzo6m2edDPv.jpg',
     distance: '10.1km',
-    show: false
+    show: false,
   },
   {
     id: '경복궁 2',
@@ -36,61 +36,49 @@ const testItem: IMapItem[] = [
     title: '경복궁 2',
     imageUrl: 'http://www.artinsight.co.kr/data/tmp/1804/79026ca47a77c48e37c1afb425b80566_RtxaVP4jOakhYzo6m2edDPv.jpg',
     distance: '10.1km',
-    show: false
+    show: false,
   },
-]
+];
 
-export default function MapScreen () {
-  const [items, setItems] = useState(testItem)
+export default function MapScreen() {
+  const [items, setItems] = useState(testItem);
 
   const toggleShow = (item: IMapItem) => {
-    const index = items.findIndex(x => x.id === item.id)
-    item.show = !item.show
-  
-    setItems([
-      ...items.slice(0, index),
-      item,
-      ...items.slice(index + 1)
-    ])
-  }
-  
-  const MapMarkerList = items.map(item =>
+    const index = items.findIndex(x => x.id === item.id);
+    item.show = !item.show;
+
+    setItems([...items.slice(0, index), item, ...items.slice(index + 1)]);
+  };
+
+  const MapMarkerList = items.map(item => (
     <MapMarker
       position={{
         lat: item.lat,
-        lng: item.lng
+        lng: item.lng,
       }}
-      clickable={true}
+      clickable
       onClick={() => toggleShow(item)}
       infoWindowOptions={{
         className: 'infoWindow',
-        style: infoWindowStyle
+        style: infoWindowStyle,
       }}
     >
-      {
-        item.show && (
-          <MapCard
-            imageUrl={item.imageUrl}
-            title={item.title}
-            distance={item.distance}
-          />
-        )
-      }
+      {item.show && <MapCard imageUrl={item.imageUrl} title={item.title} distance={item.distance} />}
     </MapMarker>
-  )
+  ));
 
   return (
     <>
       <Map
         center={{
           lat: 33.450701,
-          lng: 126.570667
+          lng: 126.570667,
         }}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: '100%', height: '100%' }}
         level={3}
       >
         {MapMarkerList}
       </Map>
     </>
-  )
+  );
 }

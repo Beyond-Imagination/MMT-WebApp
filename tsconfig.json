@@ -18,7 +18,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "types": [
-      "kakao.maps.d.ts"
+      "kakao.maps.d.ts",
+      "@types/kakao-js-sdk"
+    ],
+    "typeRoots":
+    ["./node_modules/@types",
+      "./@types"
     ]
   },
   "include": [

@@ -35,6 +35,12 @@
     // 함수의 return 타입은 자동완성되기 때문에 굳이 명시가 필요없을듯 하여 off
     "@typescript-eslint/explicit-module-boundary-types": "off",
     // 컴포넌트 하단에 추가 비즈니스 함수를 작성하는 패턴을 사용할것이기 때문에 off
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

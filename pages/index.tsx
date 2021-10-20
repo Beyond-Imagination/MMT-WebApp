@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import styles from '../styles/Home.module.css';
 import { RootState } from '../store';
 import { getTodoList } from '../store/todo';
