@@ -32,17 +32,7 @@ const ContentContainer = styled.div`
   word-wrap: break-word;
 `;
 export default function TourPanel(props: ITour) {
-  const {
-    title,
-    content_id,
-    content_type_id,
-    total_count,
-    page_no,
-    img_name,
-    num_of_rows,
-    overview,
-    image_url,
-  } = props;
+  const { title, overview, image_url } = props;
   const [loading, setLoading] = useState(false);
 
   return (
