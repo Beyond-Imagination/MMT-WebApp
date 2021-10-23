@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react'
+import React, { CSSProperties } from 'react';
 
 interface StyleObject {
-  [key: string]: CSSProperties
+  [key: string]: CSSProperties;
 }

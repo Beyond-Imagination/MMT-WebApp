@@ -39,5 +39,98 @@
         }
       ]
     }
-  }
+  },
+  "tours": [{"id": 984586,
+    "status": 200,
+    "success": true,
+    "message": "success",
+    "result": {
+      "content_id": 129898,
+      "content_type_id": 14,
+      "title": "가람화랑",
+      "overview": "가람화랑은 근대미술을 재조명하는 전시를 시작으로 개관하였다. 전문미술인이 경영하는 화랑으로서 형상미술을 위주로 하는 작가들을 중심으로  기획전과 초대전을 개최하고 있다. 근.현대미술의 수준높은 주요작품들이 전시, 판매되고  있으며, 특히 구상성 짙은 작품들을 용이하게 관람할 수 있다. 인사동이라는 대중과의 원활한 접촉이 이루어지는 지리적 조건을 갖추고 있어 초보 컬렉터들도 작품감상 및 작품 컬렉션에 관한 자문을 구할 수 있다. 대표작가로는 민정기, 한애규, 박고석, 김창세, 장영숙, 이철주, 송창, 이희중 등의 중견 작가들이 있다.<br /><br />일반 대중이 쉽게 미술과 문화에 접근하는 데에 심혈을 기울이고 있는 가람화랑은 직장인들과  중산층 컬렉터들이 가장 편하게 드나들 수 있는 평범함을 갖고 있다. 뿐만 아니라 대가들과 중진들의 작품을 접해 본 경험이 많이 있는 초보 컬렉터들의 길잡이로서도 더할  나위없다. 안창, 민정기, 이철주 등 3대작가의 작품이 전시되어 있으며, 또한 눈과 마음에 부담을 주지 않는 편한 작품들도 감상할 수 있다는 게 장점이다.<br>",
+      "images": [
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/09/1394209_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/09/1394209_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/10/1394210_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/10/1394210_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/11/1394211_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/11/1394211_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/12/1394212_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/12/1394212_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/13/1394213_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/13/1394213_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/15/1394215_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/15/1394215_image3_1.jpg"
+        },
+        {
+          "origin_img_url": "http://tong.visitkorea.or.kr/cms/resource/16/1394216_image2_1.jpg",
+          "small_img_url": "http://tong.visitkorea.or.kr/cms/resource/16/1394216_image3_1.jpg"
+        }
+      ],
+      "normal_info": [
+        {
+          "title": "홈페이지 주소",
+          "content": "<a href=\"https://blog.naver.com/garamgallery\" target=\"_blank\" title=\"새창: 홈페이지로 이동\">https://blog.naver.com/garamgallery</a>"
+        }
+      ],
+      "info_info": [
+        {
+          "title": "유모차대여 정보",
+          "content": "없음"
+        },
+        {
+          "title": "신용카드가능 정보",
+          "content": "없음"
+        },
+        {
+          "title": "애완동물동반가능 정보",
+          "content": "불가"
+        },
+        {
+          "title": "문의 및 안내",
+          "content": "가람화랑 02-732-6170"
+        },
+        {
+          "title": "주차시설",
+          "content": "인근 유료주차장 이용"
+        },
+        {
+          "title": "주차요금",
+          "content": ""
+        },
+        {
+          "title": "쉬는날",
+          "content": "일요일 및 공휴일(기획·초대전의 전시기간 중 무휴)"
+        },
+        {
+          "title": "이용요금",
+          "content": "무료"
+        },
+        {
+          "title": "이용시간",
+          "content": "10:00~17:00"
+        }
+      ],
+      "detail_info": [
+        [
+          {
+            "title": "한국어 안내서비스",
+            "content": "한국어 안내 가능"
+          }
+        ]
+      ]
+    }
+  }]
 }
