@@ -10,7 +10,7 @@ const name = 'user';
 export const getUser = createAsyncThunk(
   `${name}/getUser`, // name은 reducer이름  + / + 함수명으로 구성합니다.
   async (token: string) => {
-    return fetchUser(token);
+    return fetchUser();
   },
 );
 

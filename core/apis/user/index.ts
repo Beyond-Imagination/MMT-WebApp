@@ -1,33 +1,10 @@
 import axios from 'axios';
 import { IUser, ITokenApi } from '../../../models/user/IUser';
+import callAPI from '../../../helpers/apiCaller';
 
-export async function fetchUser(token: string): Promise<IUser> {
-  if (token === '')
-    return {
-      name: '김철수',
-      profile: 'http://picsum.photos/200',
-      klaytn_addres: 'string',
-      nft: [
-        {
-          content_id: 1, // 관광지 contentid
-          nft_id: 1,
-          image: 'string', // image link
-          title: 'string',
-          weather: 'string',
-          emotion: 'string',
-          impression: 'string',
-        },
-      ],
-      access_token: 'string',
-    };
-
-  const response = await axios({
-    method: 'get',
-    url: 'http://api.moment.beyond-imagination.ml/api/user',
-    // url: 'http://localhost:3000/tour',
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
+export async function fetchUser(): Promise<IUser> {
+  const response = await callAPI('get', '/api/users/mine');
+  return response;
 }
 export async function login(token: string): Promise<ITokenApi> {
   // const response = await axios.get('http://localhost:3000/tour');
@@ -36,7 +13,7 @@ export async function login(token: string): Promise<ITokenApi> {
   };
   const response = await axios({
     method: 'post',
-    url: 'http://api.moment.beyond-imagination.ml/api/users/login',
+    url: 'http://api.moment.beyond-imagination.ml/api/users/mine',
     data: requestBody,
   });
   return response.data;

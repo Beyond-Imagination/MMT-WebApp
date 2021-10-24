@@ -30,13 +30,13 @@ export default function loginScreen() {
       useStorage().sessionStorage.setItem('KAKAO_ACCESS_TOKEN', result);
       setAccessToken(result);
 
-      const asd1 = await callAPI('post', '/api/users/login', {
+      const loginResult = await callAPI('post', '/api/users/login', {
         access_token: result,
       });
 
-      console.log('login', asd1);
+      console.log('loginResult: ', loginResult);
 
-      const asd = await callAPI('get', '/api/tour', {
+      const tourResult = await callAPI('get', '/api/tour', {
         numOfRows: 4,
         pageNo: 1,
         arrange: 'A',
@@ -46,14 +46,13 @@ export default function loginScreen() {
         radius: 1000,
       });
 
-      console.log(asd);
+      console.log('tourResult: ', tourResult);
     } catch (e) {
       console.error(e);
     }
   };
 
   useEffect(() => {
-    console.log(process.env);
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('1fa3d84c220e7a4cbc19ac98ad079f9a');
     }
@@ -62,7 +61,7 @@ export default function loginScreen() {
   return (
     <>
       <div>Hello Access Token</div>
-      <div>{accessToken.length > 0 && <div>{accessToken}</div>}</div>
+      <div>{accessToken.length > 0 && <div>access: {accessToken}</div>}</div>
       <Button color="primary" onClick={handleKakaoLogin}>
         카카오톡으로 시작하기
       </Button>

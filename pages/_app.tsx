@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 setValue(newValue);
               }}
             >
-              <Link href="/">
+              <Link href="/Map">
                 <BottomNavigationAction value="home" label="" icon={<HomeIcon />} />
               </Link>
               <Link href="/tours">

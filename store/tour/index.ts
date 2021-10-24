@@ -9,8 +9,8 @@ const name = 'tour';
 // 2. 비동기 핸들링이 필요한 경우 createAsyncThunk 를 사용하여 처리합니다.
 export const getTourList = createAsyncThunk(
   `${name}/getTourList`, // name은 reducer이름  + / + 함수명으로 구성합니다.
-  async () => {
-    return fetchTourList();
+  async ({ contentTypeId }: any) => {
+    return fetchTourList({ contentTypeId });
   },
 );
 
@@ -48,9 +48,9 @@ const tourSlice = createSlice({
     [getTourList.pending.type]: state => {
       state.tours.loading = true;
     },
-    [getTourList.fulfilled.type]: (state, action: PayloadAction<CommonApi<ITourApi>>) => {
+    [getTourList.fulfilled.type]: (state, action: PayloadAction<ITourApi>) => {
       state.tours.loading = false;
-      state.tours.data = action.payload.result.items;
+      state.tours.data = action.payload.items;
     },
     [getTourDetail.pending.type]: state => {
       state.tourDetail.loading = true;

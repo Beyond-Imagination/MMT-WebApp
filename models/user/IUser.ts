@@ -1,8 +1,8 @@
 export interface IUser {
-  name: string;
-  profile: string;
+  nickname: string;
+  profile_image_uri: string;
   klaytn_addres: string;
-  nft: any[];
+  nft_list: any[];
   access_token: string;
 }
 

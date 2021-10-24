@@ -16,6 +16,7 @@ export default function setting() {
       getUser(oauth.data.access_token);
     } else dispatch(getUser(''));
   }, [dispatch]);
+  console.log('user:', user);
   if (user == null) {
     return <Loading />;
   }
@@ -23,10 +24,10 @@ export default function setting() {
     <Box>
       <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
         <Box>
-          <Avatar src={user.profile} alt="" sx={{ width: 80, height: 80 }} />
+          <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
         </Box>
         <Box sx={{ paddingLeft: 2 }}>
-          <Typography variant="h5">{user.name}</Typography>
+          <Typography variant="h5">{user.nickname}</Typography>
         </Box>
       </Box>
       <MenuBar title="지갑 주소 확인하기" />

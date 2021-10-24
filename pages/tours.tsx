@@ -57,8 +57,9 @@ function tours(props) {
   };
 
   useEffect(() => {
-    dispatch(getTourList());
-  }, [dispatch]);
+    const req = { contentTypeId: tabs[current].contentTypeId };
+    dispatch(getTourList(req));
+  }, [dispatch, current]);
 
   return (
     <Box className="content-container" style={{ height: '100%' }}>
@@ -79,7 +80,7 @@ function tours(props) {
             <Loading />
           ) : (
             data.map(value => (
-              <Link href={`/tours/${value.content_id}`}>
+              <Link href={`/tours/${value.content_id}`} underline="none" color="black">
                 <TourPanel key={value.content_id} {...value} />
               </Link>
             ))
