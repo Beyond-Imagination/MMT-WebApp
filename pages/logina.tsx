@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 
-export default function login() {
+export default function logina() {
   const router = useRouter();
   const { code } = router.query;
   const dispatch = useDispatch();
