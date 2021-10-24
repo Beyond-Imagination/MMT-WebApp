@@ -5,11 +5,11 @@ import callAPI from '../helpers/apiCaller';
 
 function loginWithKakao(): Promise<string> {
   return new Promise((resolve, reject) => {
-    if (!Kakao) {
+    if (!window.Kakao) {
       return reject(new Error('Kakao instance is not initialized'));
     }
 
-    Kakao.Auth.login({
+    window.Kakao.Auth.login({
       success(auth) {
         resolve(auth.access_token);
       },
@@ -53,8 +53,9 @@ export default function loginScreen() {
   };
 
   useEffect(() => {
-    if (!Kakao.isInitialized()) {
-      Kakao.init(process.env.KAKAO_SDK_JAVASCRIPT_KEY);
+    console.log(process.env);
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init('1fa3d84c220e7a4cbc19ac98ad079f9a');
     }
   });
 
