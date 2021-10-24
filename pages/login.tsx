@@ -30,6 +30,12 @@ export default function loginScreen() {
       useStorage().sessionStorage.setItem('KAKAO_ACCESS_TOKEN', result);
       setAccessToken(result);
 
+      const asd1 = await callAPI('post', '/api/users/login', {
+        access_token: result,
+      });
+
+      console.log('login', asd1);
+
       const asd = await callAPI('get', '/api/tour', {
         numOfRows: 4,
         pageNo: 1,
