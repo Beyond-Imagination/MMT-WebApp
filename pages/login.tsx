@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import useStorage from '../hooks/useStorage';
-import useApi from '../hooks/useApi';
+import callAPI from '../helpers/apiCaller';
 
 function loginWithKakao(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -23,25 +23,15 @@ function loginWithKakao(): Promise<string> {
 
 export default function loginScreen() {
   const [accessToken, setAccessToken] = useState('');
-  const [state, fetchTour] = useApi('/api/tour', 'get');
-
-  const { data } = state;
 
   const handleKakaoLogin = async () => {
     try {
       const result = await loginWithKakao();
       useStorage().sessionStorage.setItem('KAKAO_ACCESS_TOKEN', result);
-
       setAccessToken(result);
-      await fetchTour({
-        pageNo: 1,
-        arrange: 'A',
-        contentTypeId: 12,
-        mapX: 126.981611,
-        mapY: 37.568477,
-        radius: 1000,
-      });
-      console.log('fucking', data);
+
+      const asd = await callAPI('get', '/api/tour');
+      console.log(asd);
     } catch (e) {
       console.error(e);
     }
