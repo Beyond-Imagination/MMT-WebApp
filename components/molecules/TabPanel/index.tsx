@@ -13,6 +13,7 @@ export default function TabPanel(props: TabPanelProps) {
 
   return (
     <div
+      className="tabpanel"
       role="tabpanel"
       hidden={current !== index}
       id={`simple-tabpanel-${index}`}

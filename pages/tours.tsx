@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Chip, CircularProgress, Stack } from '@mui/material';
+import { Chip, CircularProgress, Link, Stack } from '@mui/material';
 import styled from 'styled-components';
 import { TabPanel, Tabs } from '../components/molecules';
 import TourPanel from '../components/atoms/TourPanel';
@@ -75,7 +75,15 @@ function tours(props) {
       </Stack>
       <Box style={{ overflow: 'scroll', height: '88%' }}>
         <TabPanel current={current} index={current}>
-          {loading ? <Loading /> : data.map(value => <TourPanel key={value.content_id} {...value} />)}
+          {loading ? (
+            <Loading />
+          ) : (
+            data.map(value => (
+              <Link href={`/tours/${value.content_id}`}>
+                <TourPanel key={value.content_id} {...value} />
+              </Link>
+            ))
+          )}
         </TabPanel>
       </Box>
     </Box>

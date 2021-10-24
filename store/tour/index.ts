@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchTourList } from '../../core/apis/tour';
+import { fetchTourDetail, fetchTourList } from '../../core/apis/tour';
 import { IAsyncState } from '../../models/IAsyncState';
-import ITour, { CommonApi, ITourApi } from '../../models/tour/ITour';
+import ITour, { CommonApi, ITourApi, ITourDetail } from '../../models/tour/ITour';
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'tour';
@@ -14,15 +14,27 @@ export const getTourList = createAsyncThunk(
   },
 );
 
+export const getTourDetail = createAsyncThunk(
+  `${name}/getTourDetail`, // name은 reducer이름  + / + 함수명으로 구성합니다.
+  async (tourId: number) => {
+    return fetchTourDetail(tourId);
+  },
+);
+
 // 3. 스토어 타입을 정의합니다. xxxState의 네이밍으로 통일하여 구성합니다.
 export interface ITourState {
   tours: IAsyncState<ITour[]>;
+  tourDetail: IAsyncState<ITourDetail>;
 }
 
 // 4. reducer 초기값을 정의합니다.
 const initialState: ITourState = {
   tours: {
     data: [],
+    loading: false,
+  },
+  tourDetail: {
+    data: null,
     loading: false,
   },
 };
@@ -39,6 +51,13 @@ const tourSlice = createSlice({
     [getTourList.fulfilled.type]: (state, action: PayloadAction<CommonApi<ITourApi>>) => {
       state.tours.loading = false;
       state.tours.data = action.payload.result.items;
+    },
+    [getTourDetail.pending.type]: state => {
+      state.tourDetail.loading = true;
+    },
+    [getTourDetail.fulfilled.type]: (state, action: PayloadAction<CommonApi<ITourDetail>>) => {
+      state.tourDetail.loading = false;
+      state.tourDetail.data = action.payload.result;
     },
   },
 });

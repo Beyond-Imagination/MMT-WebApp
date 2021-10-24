@@ -22,3 +22,20 @@ export interface CommonApi<T> {
   message: string;
   result: T;
 }
+
+export interface ITourDetail {
+  content_id: number; // 콘텐츠 ID
+  content_type_id: number; // 관광타입(관광지, 숙박 등) ID
+  title: string; // 콘텐츠명(제목)
+  overview?: string; // 콘텐츠 개요
+  images:
+    | {
+        img_name?: string; // 이미지명
+        origin_img_url?: string; // 원본 이미지
+        small_img_url?: string; // 썸네일 이미지
+      }[]
+    | []; // 이미지
+  normal_info: { title: string; content: string }[] | []; // 기본 정보
+  info_info: { title: string; content: string }[] | []; // 소개 정보
+  detail_info: { title: string; content: string }[] | []; // 상세 정보
+}
