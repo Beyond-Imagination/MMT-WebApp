@@ -13,14 +13,12 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import store from '../store';
 import '../styles/globals.css';
-import { useEffect } from 'react';
 import { Link } from '@mui/material';
 
 const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [value, setValue] = React.useState('Home');
-  useEffect(() => {});
 
   return (
     <Provider store={store}>

@@ -56,7 +56,7 @@ export default function useApi(
     try {
       let url = `${BASE_URL}${endpoint}`;
       let data;
-      const token = useStorage().sessionStorage.getItem('KAKAO_ACCESS_TOKEN');
+      const token = useStorage().localStorage.getItem('KAKAO_ACCESS_TOKEN');
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

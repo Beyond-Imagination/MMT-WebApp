@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
-import useStorage from '../hooks/useStorage';
-import callAPI from '../helpers/apiCaller';
+import useStorage from '../../../hooks/useStorage';
+import callAPI from '../../../helpers/apiCaller';
 
 function loginWithKakao(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -21,32 +21,15 @@ function loginWithKakao(): Promise<string> {
   });
 }
 
-export default function loginScreen() {
-  const [accessToken, setAccessToken] = useState('');
-
+export default function kakaoLogin(callback) {
   const handleKakaoLogin = async () => {
     try {
       const result = await loginWithKakao();
       useStorage().localStorage.setItem('KAKAO_ACCESS_TOKEN', result);
-      setAccessToken(result);
-
-      const loginResult = await callAPI('post', '/api/users/login', {
+      await callAPI('post', '/api/users/login', {
         access_token: result,
       });
-
-      console.log('loginResult: ', loginResult);
-
-      const tourResult = await callAPI('get', '/api/tour', {
-        numOfRows: 4,
-        pageNo: 1,
-        arrange: 'A',
-        contentTypeId: 12,
-        mapX: 126.981611,
-        mapY: 37.568477,
-        radius: 1000,
-      });
-
-      console.log('tourResult: ', tourResult);
+      callback();
     } catch (e) {
       console.error(e);
     }
@@ -56,15 +39,15 @@ export default function loginScreen() {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('1fa3d84c220e7a4cbc19ac98ad079f9a');
     }
-  });
+  }, []);
 
-  return (
+  const KakaoLogin = () => (
     <>
-      <div>Hello Access Token</div>
-      <div>{accessToken.length > 0 && <div>access: {accessToken}</div>}</div>
       <Button color="primary" onClick={handleKakaoLogin}>
         카카오톡으로 시작하기
       </Button>
     </>
   );
+
+  return KakaoLogin;
 }

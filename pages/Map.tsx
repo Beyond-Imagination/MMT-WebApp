@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import MapCard from '../components/molecules/MapCard';
 import Storages from '../hooks/useStorage';
+import useAuth from '../components/common/Authentication';
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -50,12 +51,15 @@ export default function MapScreen() {
     setItems([...items.slice(0, index), item, ...items.slice(index + 1)]);
   };
 
+  const Auth = useAuth();
+
   const MapMarkerList = items.map(item => (
     <MapMarker
       position={{
         lat: item.lat,
         lng: item.lng,
       }}
+      key={item.id}
       clickable
       onClick={() => toggleShow(item)}
       infoWindowOptions={{
