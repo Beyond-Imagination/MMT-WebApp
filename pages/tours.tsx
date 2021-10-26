@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Chip, CircularProgress, Link, Stack } from '@mui/material';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import { TabPanel, Tabs } from '../components/molecules';
 import TourPanel from '../components/atoms/TourPanel';
 import { RootState } from '../store';
@@ -51,7 +52,14 @@ function tours(props) {
   const [arrange, setArrange] = React.useState(arrangeType[0]);
   const { loading, data, error } = useSelector((root: RootState) => root.tour.tours);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, []);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrent(newValue);
   };

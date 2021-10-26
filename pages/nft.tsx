@@ -23,7 +23,14 @@ export default function nft() {
   };
   const { nftList } = useSelector((root: RootState) => root.nft);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, []);
   useEffect(() => {
     dispatch(getNftList());
   }, [dispatch]);

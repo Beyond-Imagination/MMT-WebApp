@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { getUser, loginUser } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
@@ -10,7 +11,13 @@ export default function setting() {
   const { data: user } = useSelector((state: RootState) => state.user.users);
   const { token, isLoggedIn, oauth } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, []);
   useEffect(() => {
     if (isLoggedIn) {
       getUser(oauth.data.access_token);

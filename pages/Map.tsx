@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import MapCard from '../components/molecules/MapCard';
 import useAuth from '../components/common/Authentication';
+import { RootState } from '../store';
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -41,7 +44,14 @@ const testItem: IMapItem[] = [
 
 export default function MapScreen() {
   const [items, setItems] = useState(testItem);
+  const router = useRouter();
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, []);
   const toggleShow = (item: IMapItem) => {
     const index = items.findIndex(x => x.id === item.id);
     item.show = !item.show;
