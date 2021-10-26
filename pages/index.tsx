@@ -1,17 +1,26 @@
-import Head from 'next/head';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import { useSelector } from 'react-redux';
+
 import { useRouter } from 'next/router';
 
+import { useEffect } from 'react';
 import MapScreen from './Map';
 import useStorage from '../hooks/useStorage';
+import { RootState } from '../store';
 
 function Home() {
   const router = useRouter();
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, []);
   // if (token == null || token === '') router.push('/login');
+
+  if (!isLoggedIn) {
+    return <div>Redirect to Login page...</div>;
+  }
   return <MapScreen />;
 }
 

@@ -8,7 +8,7 @@ class MyDocument extends Document {
   }
 
   render() {
-    const { KAKAO_SDK_JAVASCRIPT_KEY } = process.env;
+    const KAKAO_SDK_JAVASCRIPT_KEY = '1fa3d84c220e7a4cbc19ac98ad079f9a';
     const kakaoScriptSrc = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_SDK_JAVASCRIPT_KEY}&libraries=services,clusterer`;
     return (
       <Html>

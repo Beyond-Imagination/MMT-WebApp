@@ -1,8 +1,6 @@
-import { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import MapCard from '../components/molecules/MapCard';
-import Storages from '../hooks/useStorage';
 import useAuth from '../components/common/Authentication';
 
 const infoWindowStyle: React.CSSProperties = {
