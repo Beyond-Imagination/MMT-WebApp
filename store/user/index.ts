@@ -50,7 +50,6 @@ const userSlice = createSlice({
   extraReducers: {
     [getUser.pending.type]: state => {
       state.users.loading = true;
-      state.isLoggedIn = true;
     },
     [getUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.users.loading = false;

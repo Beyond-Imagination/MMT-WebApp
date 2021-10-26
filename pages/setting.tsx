@@ -18,6 +18,7 @@ export default function setting() {
       router.push('/login');
     }
   }, []);
+
   useEffect(() => {
     if (isLoggedIn) {
       getUser(oauth.data.access_token);
