@@ -18,7 +18,7 @@ export default function setting() {
   }, [dispatch]);
   console.log('user:', user);
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn || user == null) {
     return (
       <Box sx={{ padding: 0, margin: 0 }}>
         <Loading />
@@ -38,7 +38,6 @@ export default function setting() {
       </Box>
       <MenuBar title="지갑 주소 확인하기" />
       <MenuBar title="NFT 토큰" />
-      {/* <MenuBar title="뱃지" /> */}
       <MenuBar title="로그아웃" />
     </Box>
   );
