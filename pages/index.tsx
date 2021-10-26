@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import MapScreen from './Map';
+import useStorage from '../hooks/useStorage';
 
 function Home() {
   const router = useRouter();
 
+  // if (token == null || token === '') router.push('/login');
   return <MapScreen />;
 }
 

@@ -18,9 +18,20 @@ class MyDocument extends Document {
           <script type="text/javascript" src={kakaoScriptSrc} />
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js" />
         </Head>
-        <body>
-          <Main />
-          <NextScript />
+        <body
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            backgroundColor: '#ABABAB',
+            height: '100%',
+          }}
+        >
+          <div className="screen" style={{ width: 388, backgroundColor: 'white' }}>
+            <Main />
+            <NextScript />
+          </div>
         </body>
       </Html>
     );

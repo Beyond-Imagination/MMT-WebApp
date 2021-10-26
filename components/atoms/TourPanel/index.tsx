@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 
 import { useState } from 'react';
 import styled from 'styled-components';
+import { height } from '@mui/system';
 import ITour from '../../../models/tour/ITour';
 
 const Image = styled.img`
@@ -32,14 +33,14 @@ const ContentContainer = styled.div`
   word-wrap: break-word;
 `;
 export default function TourPanel(props: ITour) {
-  const { title, overview, image_url } = props;
+  const { title, overview, image_url: imageUrl } = props;
   const [loading, setLoading] = useState(false);
 
   return (
     <Container>
       <Panel>
-        <div>{loading ? <Skeleton width={100} height={166.67} /> : <Image src={image_url} alt="" />}</div>
-        <div>
+        <div>{loading ? <Skeleton width={100} height={166.67} /> : <Image src={imageUrl} alt="" />}</div>
+        <div style={{ width: '70%' }}>
           <Typography
             variant="subtitle1"
             gutterBottom

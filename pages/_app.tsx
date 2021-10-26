@@ -27,13 +27,25 @@ function MyApp({ Component, pageProps }: AppProps) {
           <div className="page">
             <Component {...pageProps} />
           </div>
-          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+          <Paper
+            sx={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            elevation={3}
+          >
             <BottomNavigation
               showLabels
               value={value}
               onChange={(event, newValue) => {
                 setValue(newValue);
               }}
+              style={{ maxWidth: 388 }}
             >
               <Link href="/Map">
                 <BottomNavigationAction value="home" label="" icon={<HomeIcon />} />

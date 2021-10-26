@@ -57,9 +57,9 @@ function tours(props) {
   };
 
   useEffect(() => {
-    const req = { contentTypeId: tabs[current].contentTypeId };
+    const req = { contentTypeId: tabs[current].contentTypeId, arrange: arrange.value };
     dispatch(getTourList(req));
-  }, [dispatch, current]);
+  }, [dispatch, current, arrange]);
 
   return (
     <Box className="content-container" style={{ height: '100%' }}>
@@ -71,7 +71,16 @@ function tours(props) {
           if (arrange.id === value.id)
             return <Chip label={value.label} size="small" variant="filled" color="success" />;
 
-          return <Chip label={value.label} size="small" variant="outlined" />;
+          return (
+            <Chip
+              label={value.label}
+              size="small"
+              variant="outlined"
+              onClick={event => {
+                setArrange(value);
+              }}
+            />
+          );
         })}
       </Stack>
       <Box style={{ overflow: 'scroll', height: '88%' }}>
