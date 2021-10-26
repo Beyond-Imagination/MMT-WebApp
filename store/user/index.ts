@@ -44,11 +44,13 @@ const userSlice = createSlice({
   reducers: {
     saveToken: (state, action) => {
       state.token = action.payload;
+      state.isLoggedIn = true;
     },
   },
   extraReducers: {
     [getUser.pending.type]: state => {
       state.users.loading = true;
+      state.isLoggedIn = true;
     },
     [getUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.users.loading = false;

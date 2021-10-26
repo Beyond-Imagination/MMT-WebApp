@@ -17,9 +17,15 @@ export default function setting() {
     } else dispatch(getUser(''));
   }, [dispatch]);
   console.log('user:', user);
-  if (user == null) {
-    return <Loading />;
+
+  if (1) {
+    return (
+      <Box sx={{ height: 1024, padding: 0, margin: 0 }}>
+        <Loading />
+      </Box>
+    );
   }
+
   return (
     <Box>
       <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>

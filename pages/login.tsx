@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import useStorage from '../hooks/useStorage';
 import callAPI from '../helpers/apiCaller';
+import { userActions } from '../store/user';
+import { RootState } from '../store';
 
 function loginWithKakao(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -23,7 +27,9 @@ function loginWithKakao(): Promise<string> {
 
 export default function loginScreen() {
   const [accessToken, setAccessToken] = useState('');
-
+  const router = useRouter();
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   const handleKakaoLogin = async () => {
     try {
       const result = await loginWithKakao();
@@ -35,6 +41,7 @@ export default function loginScreen() {
       });
 
       console.log('loginResult: ', loginResult);
+      dispatch(userActions.saveToken(loginResult));
 
       const tourResult = await callAPI('get', '/api/tour', {
         numOfRows: 4,
@@ -58,6 +65,10 @@ export default function loginScreen() {
     }
     // handleKakaoLogin();
   });
+  console.log(isLoggedIn);
+  if (isLoggedIn) {
+    router.push('/');
+  }
 
   return (
     <div style={{ height: '100%', paddingTop: 128 }}>

@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 
 import { useState } from 'react';
 import styled from 'styled-components';
-import { height } from '@mui/system';
 import ITour from '../../../models/tour/ITour';
 
 const Image = styled.img`
