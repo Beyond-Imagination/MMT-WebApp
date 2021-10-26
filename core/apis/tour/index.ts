@@ -16,14 +16,6 @@ export async function fetchTourList({ contentTypeId, arrange }: any): Promise<Co
 }
 
 export async function fetchTourDetail(tourId: number): Promise<CommonApi<ITourDetail>> {
-  // const response = await axios.get('http://localhost:3000/tour');
-  // const response = await axios({
-  //   method: 'get',
-  //   // url: 'https://api.moment.beyond-imagination.ml/api/tours',
-  //   // url: 'http://localhost:3000/tours/1',
-  //   url: `http://localhost:3000/tours/${tourId}`,
-  //   headers: { Authorization: 'Bearer 1fa3d84c220e7a4cbc19ac98ad079f9a ' },
-  // });
   const tourDetail = await callAPI('get', `/api/tour/${tourId}`, { contentTypeId: 14 });
   return tourDetail;
 }

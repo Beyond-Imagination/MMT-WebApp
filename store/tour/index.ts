@@ -55,9 +55,11 @@ const tourSlice = createSlice({
     [getTourDetail.pending.type]: state => {
       state.tourDetail.loading = true;
     },
-    [getTourDetail.fulfilled.type]: (state, action: PayloadAction<CommonApi<ITourDetail>>) => {
+    [getTourDetail.fulfilled.type]: (state, action: PayloadAction<ITourDetail>) => {
       state.tourDetail.loading = false;
-      state.tourDetail.data = action.payload.result;
+      console.log('action.payload: ', action.payload);
+      state.tourDetail.data = action.payload;
+      console.log(state.tourDetail.data);
     },
   },
 });
