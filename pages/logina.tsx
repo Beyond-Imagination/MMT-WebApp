@@ -9,7 +9,6 @@ export default function logina() {
   const { code } = router.query;
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
-  const REQUEST_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   useEffect(() => {
     console.log('useEffect');
