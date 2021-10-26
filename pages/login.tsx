@@ -56,15 +56,22 @@ export default function loginScreen() {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('1fa3d84c220e7a4cbc19ac98ad079f9a');
     }
+    // handleKakaoLogin();
   });
 
   return (
-    <>
-      <div>Hello Access Token</div>
-      <div>{accessToken.length > 0 && <div>access: {accessToken}</div>}</div>
-      <Button color="primary" onClick={handleKakaoLogin}>
-        카카오톡으로 시작하기
-      </Button>
-    </>
+    <div style={{ height: '100%', paddingTop: 128 }}>
+      {/* <div>Hello Access Token</div> */}
+      {/* <div>{accessToken.length > 0 && <div>access: {accessToken}</div>}</div> */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img src="../static/logo.png" alt="" style={{ height: 240 }} />
+      </div>
+      <div
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 40 }}
+        onClick={handleKakaoLogin}
+      >
+        <img src="../static/kakao_login_large_wide.png" alt="" style={{ height: 50 }} />
+      </div>
+    </div>
   );
 }
