@@ -18,9 +18,9 @@ export default function setting() {
   }, [dispatch]);
   console.log('user:', user);
 
-  if (1) {
+  if (!isLoggedIn) {
     return (
-      <Box sx={{ height: 1024, padding: 0, margin: 0 }}>
+      <Box sx={{ padding: 0, margin: 0 }}>
         <Loading />
       </Box>
     );
