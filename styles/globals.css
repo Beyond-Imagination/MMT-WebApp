@@ -30,9 +30,47 @@ a {
 
 .page {
     height: 94vh;
+    width: 100%
 }
 
-.tabpanel{
+
+/* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) {
+    .screen {
+        background: white;
+        width: 480px;
+        height: 100%;
+    }
+}
+
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+    .screen {
+        background: white;
+        width: 480px;
+        height: 100%;
+    }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width: 480px) and (max-width: 767px) {
+    .screen {
+        background: white;
+        width: 480px;
+        height: 100%;
+    }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+@media all and (max-width: 479px) {
+    .screen {
+        background: white;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.tabpanel {
     height: calc(100vh - 50px - 58px);
     padding: 5px 0;
     box-sizing: border-box;

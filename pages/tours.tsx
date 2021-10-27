@@ -10,6 +10,7 @@ import TourPanel from '../components/atoms/TourPanel';
 import { RootState } from '../store';
 import { getTourList } from '../store/tour';
 import Loading from '../components/atoms/Loading';
+import { loginUser, userActions } from '../store/user';
 
 const tabs = [
   {
@@ -50,19 +51,23 @@ const arrangeType = [
 function tours(props) {
   const [current, setCurrent] = React.useState(0);
   const [arrange, setArrange] = React.useState(arrangeType[0]);
-  const { loading, data, error } = useSelector((root: RootState) => root.tour.tours);
+  const { loading, data, error } = useSelector((state: RootState) => state.tour.tours);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/login');
-    }
+    dispatch(loginUser());
   }, []);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrent(newValue);
   };
+  useEffect(() => {
+    if (token == null) {
+      router.push('/login');
+    }
+  }, [isLoggedIn, token]);
 
   useEffect(() => {
     const req = { contentTypeId: tabs[current].contentTypeId, arrange: arrange.value };
@@ -70,17 +75,18 @@ function tours(props) {
   }, [dispatch, current, arrange]);
 
   return (
-    <Box className="content-container" style={{ height: '100%' }}>
-      <Box height="8%">
+    <Box className="content-container" style={{ height: '100%', backgroundColor: 'white' }}>
+      <Box sx={{ mb: 1 }}>
         <Tabs values={tabs} current={current} handleChange={handleChange} />
       </Box>
-      <Stack height="4%" direction="row" spacing={0.5} sx={{ pl: 1 }}>
+      <Stack direction="row" spacing={0.5} sx={{ pl: 1, mb: 1 }}>
         {arrangeType.map(value => {
           if (arrange.id === value.id)
-            return <Chip label={value.label} size="small" variant="filled" color="success" />;
+            return <Chip key={value.id} label={value.label} size="small" variant="filled" color="success" />;
 
           return (
             <Chip
+              key={value.id}
               label={value.label}
               size="small"
               variant="outlined"
@@ -91,13 +97,13 @@ function tours(props) {
           );
         })}
       </Stack>
-      <Box style={{ overflow: 'scroll', height: '88%' }}>
+      <Box style={{ overflow: 'scroll', height: '88%', paddingTop: 0 }}>
         <TabPanel current={current} index={current}>
           {loading ? (
             <Loading />
           ) : (
             data.map(value => (
-              <Link href={`/tours/${value.content_id}`} underline="none" color="black">
+              <Link key={value.content_id} href={`/tours/${value.content_id}`} underline="none" color="black">
                 <TourPanel key={value.content_id} {...value} />
               </Link>
             ))

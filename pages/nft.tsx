@@ -7,6 +7,8 @@ import { MyNft, TabPanel, Tabs } from '../components/molecules';
 import { ITabProps } from '../components/molecules/Tabs';
 import { RootState } from '../store';
 import { getNftList, nftActions } from '../store/nft';
+import { loginUser } from '../store/user';
+import { Loading } from '../components/atoms';
 
 const tabs: ITabProps[] = [
   { id: 1, title: '내 NFT' },
@@ -24,23 +26,32 @@ export default function nft() {
   const { nftList } = useSelector((root: RootState) => root.nft);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    dispatch(loginUser());
+  }, []);
+
+  useEffect(() => {
+    if (token == null) {
       router.push('/login');
     }
-  }, []);
+  }, [isLoggedIn, token]);
+
   useEffect(() => {
     dispatch(getNftList());
   }, [dispatch]);
 
   return (
-    <Box>
+    <Box className="nft" sx={{ width: '100%', backgroundColor: 'white' }}>
       <Tabs values={tabs} current={current} handleChange={handleChange} />
-      <TabPanel current={current} index={0}>
-        <MyNft nftList={nftList.data} />
-      </TabPanel>
+      {nftList.loading || nftList.data.length === 0 ? (
+        <Loading />
+      ) : (
+        <TabPanel current={current} index={0}>
+          <MyNft nftList={nftList.data} />
+        </TabPanel>
+      )}
     </Box>
   );
 }

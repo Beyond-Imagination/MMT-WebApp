@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUser, login } from '../../core/apis/user';
 import { IAsyncState } from '../../models/IAsyncState';
 import { IUser, ITokenApi } from '../../models/user/IUser';
+import useStorage from '../../hooks/useStorage';
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'user';
@@ -14,8 +15,15 @@ export const getUser = createAsyncThunk(
   },
 );
 
-export const loginUser = createAsyncThunk(`${name}/login`, async (token: string) => {
-  return login(token);
+export const loginUser = createAsyncThunk(`${name}/login`, async (_, thunkApi) => {
+  const accessToken: string = useStorage().localStorage.getItem('KAKAO_ACCESS_TOKEN');
+
+  console.log('accessToken: ', accessToken);
+  if (accessToken == null) {
+    return thunkApi.rejectWithValue(false);
+  }
+
+  return login(accessToken);
 });
 
 // 3. 스토어 타입을 정의합니다. xxxState의 네이밍으로 통일하여 구성합니다.
@@ -32,9 +40,13 @@ const initialState: IUserState = {
     data: null,
     loading: false,
   },
-  token: null,
+  token: '',
   isLoggedIn: false,
-  oauth: null,
+  oauth: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };
 
 // 5. slice를 export 시켜주도록 합니다.
@@ -45,6 +57,9 @@ const userSlice = createSlice({
     saveToken: (state, action) => {
       state.token = action.payload;
       state.isLoggedIn = true;
+    },
+    logout: state => {
+      state.isLoggedIn = false;
     },
   },
   extraReducers: {
@@ -63,11 +78,18 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
       state.oauth.data = action.payload;
     },
+    [loginUser.rejected.type]: (state, action: PayloadAction<ITokenApi>) => {
+      state.users.loading = false;
+      state.isLoggedIn = false;
+      state.token = null;
+    },
   },
 });
 
 export const userActions = {
   ...userSlice.actions,
+  getUser,
+  loginUser,
 };
 
 export default userSlice;

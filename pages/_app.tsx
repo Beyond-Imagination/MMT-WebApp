@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={client}>
-        <Box sx={{ pb: 7 }}>
+        <Box sx={{ pb: 7, width: '100%', height: '100%' }}>
           <div className="page">
             <Component {...pageProps} />
           </div>

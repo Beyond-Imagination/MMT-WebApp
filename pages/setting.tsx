@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { Avatar, Box, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Avatar, Box, Modal, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { getUser, loginUser } from '../store/user';
+import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
 import RightArrow from '../static/right-arrow.svg';
@@ -12,49 +12,95 @@ export default function setting() {
   const { token, isLoggedIn, oauth } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const [open, setOpen] = useState<boolean>(false);
+  const handleClose = () => setOpen(false);
   useEffect(() => {
-    if (!isLoggedIn) {
+    dispatch(loginUser());
+  }, []);
+  useEffect(() => {
+    if (token == null) {
       router.push('/login');
     }
-  }, []);
+  }, [isLoggedIn, token]);
 
   useEffect(() => {
     if (isLoggedIn) {
       getUser(oauth.data.access_token);
     } else dispatch(getUser(''));
-  }, [dispatch]);
-  console.log('user:', user);
-
-  if (!isLoggedIn || user == null) {
-    return (
-      <Box sx={{ padding: 0, margin: 0 }}>
-        <Loading />
-      </Box>
-    );
-  }
+  }, [dispatch, isLoggedIn]);
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
-        <Box>
-          <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
-        </Box>
-        <Box sx={{ paddingLeft: 2 }}>
-          <Typography variant="h5">{user.nickname}</Typography>
-        </Box>
-      </Box>
-      <MenuBar title="지갑 주소 확인하기" />
-      <MenuBar title="NFT 토큰" />
-      <MenuBar title="로그아웃" />
+    <Box sx={{ backgroundColor: 'white', width: '100%' }}>
+      {!isLoggedIn || user == null ? (
+        <Loading />
+      ) : (
+        <>
+          <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
+            <Box>
+              <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
+            </Box>
+            <Box sx={{ paddingLeft: 2 }}>
+              <Typography variant="h5">{user.nickname}</Typography>
+            </Box>
+          </Box>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                지갑 주소
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {user.klaytn_addres}
+              </Typography>
+            </Box>
+          </Modal>
+          <MenuBar
+            title="지갑 주소 확인하기"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
+          <MenuBar
+            title="NFT 토큰"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
+          <MenuBar
+            title="로그아웃"
+            onClick={() => {
+              localStorage.clear();
+              dispatch(userActions.logout());
+              router.push('/login');
+              console.log('Removed!');
+            }}
+          />
+        </>
+      )}
     </Box>
   );
 }
+const style = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 interface IMenuBar {
   title: string;
+  onClick: any;
 }
-function MenuBar({ title }: IMenuBar) {
+function MenuBar({ title, onClick }: IMenuBar) {
   return (
     <Box
       sx={{
@@ -72,6 +118,7 @@ function MenuBar({ title }: IMenuBar) {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}
+      onClick={onClick}
     >
       <div>
         <Typography variant="subtitle1">{title}</Typography>

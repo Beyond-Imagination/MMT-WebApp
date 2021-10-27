@@ -42,18 +42,6 @@ export default function loginScreen() {
 
       console.log('loginResult: ', loginResult);
       dispatch(userActions.saveToken(loginResult));
-
-      const tourResult = await callAPI('get', '/api/tour', {
-        numOfRows: 4,
-        pageNo: 1,
-        arrange: 'A',
-        contentTypeId: 12,
-        mapX: 126.981611,
-        mapY: 37.568477,
-        radius: 1000,
-      });
-
-      console.log('tourResult: ', tourResult);
     } catch (e) {
       console.error(e);
     }
@@ -65,7 +53,7 @@ export default function loginScreen() {
     }
     // handleKakaoLogin();
   });
-  console.log(isLoggedIn);
+
   if (isLoggedIn) {
     router.push('/');
   }

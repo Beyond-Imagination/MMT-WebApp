@@ -1,6 +1,8 @@
 import { INftApi } from '../../../models/nft/INft';
+import delay from '../../utils/delay';
 
 export async function fetchNftList(): Promise<INftApi> {
+  await delay(700);
   return {
     nft: [
       {

@@ -28,7 +28,7 @@ class MyDocument extends Document {
             height: '100%',
           }}
         >
-          <div className="screen" style={{ width: 388, backgroundColor: 'white' }}>
+          <div className="screen">
             <Main />
             <NextScript />
           </div>
