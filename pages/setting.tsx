@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Avatar, Box, Modal, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
 import RightArrow from '../static/right-arrow.svg';
+import NftModal from '../components/molecules/Setting/NftModal';
 
 export default function setting() {
   const { data: user } = useSelector((state: RootState) => state.user.users);
@@ -43,21 +44,7 @@ export default function setting() {
               <Typography variant="h5">{user.nickname}</Typography>
             </Box>
           </Box>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                지갑 주소
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {user.klaytn_addres}
-              </Typography>
-            </Box>
-          </Modal>
+          <NftModal handleClose={handleClose} handleOpen={open} klaytnAddres={user.klaytn_addres} />
           <MenuBar
             title="지갑 주소 확인하기"
             onClick={() => {
@@ -84,22 +71,12 @@ export default function setting() {
     </Box>
   );
 }
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 interface IMenuBar {
   title: string;
   onClick: any;
 }
+
 function MenuBar({ title, onClick }: IMenuBar) {
   return (
     <Box
