@@ -103,7 +103,12 @@ function tours(props) {
             <Loading />
           ) : (
             data.map(value => (
-              <Link key={value.content_id} href={`/tours/${value.content_id}`} underline="none" color="black">
+              <Link
+                key={value.content_id}
+                href={`/tours/${value.content_id}?contentTypeId=${value.content_type_id}`}
+                underline="none"
+                color="black"
+              >
                 <TourPanel key={value.content_id} {...value} />
               </Link>
             ))

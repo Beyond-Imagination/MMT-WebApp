@@ -16,8 +16,8 @@ export const getTourList = createAsyncThunk(
 
 export const getTourDetail = createAsyncThunk(
   `${name}/getTourDetail`, // name은 reducer이름  + / + 함수명으로 구성합니다.
-  async (tourId: number) => {
-    return fetchTourDetail(tourId);
+  async ({ tourId, contentTypeId }: any) => {
+    return fetchTourDetail(tourId, contentTypeId);
   },
 );
 

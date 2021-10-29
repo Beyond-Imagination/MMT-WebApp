@@ -15,7 +15,7 @@ export async function fetchTourList({ contentTypeId, arrange }: any): Promise<Co
   return tourResult;
 }
 
-export async function fetchTourDetail(tourId: number): Promise<CommonApi<ITourDetail>> {
-  const tourDetail = await callAPI('get', `/api/tour/${tourId}`, { contentTypeId: 14 });
+export async function fetchTourDetail(tourId: number, contentTypeId: number): Promise<CommonApi<ITourDetail>> {
+  const tourDetail = await callAPI('get', `/api/tour/${tourId}`, { contentTypeId });
   return tourDetail;
 }
