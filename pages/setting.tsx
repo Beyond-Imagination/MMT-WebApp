@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
@@ -22,11 +23,20 @@ export default function setting() {
 
   useEffect(() => {
     if (oauth.data != null && !oauth.data.is_klip_linked) {
+      // SDK
       const klipSdk = require('../static/klipSDK-2.0.1.min');
       const bappName = 'Moment';
-      const successLink = 'localhost:4005/setting';
-      const failLink = 'localhost:4005/setting';
-      const res = klipSdk.prepare.auth({ bappName, successLink, failLink }).then(value => value);
+      const res = klipSdk.prepare
+        .auth({ bappName })
+        .then(value => klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요')));
+
+      // axios
+      const req = {
+        bapp: { name: 'Moment' },
+        type: 'auth',
+      };
+      axios.post('https://a2a-api.klipwallet.com/v2/a2a/prepare', req);
+
       if (res.err) {
         // 에러 처리
       } else if (res.request_key) {
