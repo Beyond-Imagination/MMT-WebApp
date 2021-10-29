@@ -1,15 +1,15 @@
 import { Box, Typography, Modal } from '@mui/material';
 
 interface Prop {
-  handleOpen: any;
+  open: boolean;
   handleClose: any;
   klaytnAddres: string;
 }
 
-const NftModal = ({ handleOpen, handleClose, klaytnAddres }: Prop) => {
+const NftModal = ({ open, handleClose, klaytnAddres }: Prop) => {
   return (
     <Modal
-      open={handleOpen}
+      open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

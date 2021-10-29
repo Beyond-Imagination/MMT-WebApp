@@ -13,7 +13,9 @@ const TourDetail = () => {
   const { data } = useSelector((state: RootState) => state.tour.tourDetail);
 
   useEffect(() => {
-    dispatch(getTourDetail({ tourId: Number(pid), contentTypeId: Number(contentTypeId) }));
+    if (Number(pid)) {
+      dispatch(getTourDetail({ tourId: Number(pid), contentTypeId: Number(contentTypeId) }));
+    }
   }, [dispatch, pid]);
 
   if (data === null) return <div>Loading...</div>;

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
@@ -15,9 +16,40 @@ export default function setting() {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const handleClose = () => setOpen(false);
+  const [add, setAdd] = useState();
   useEffect(() => {
     dispatch(loginUser());
   }, []);
+
+  // useEffect(() => {
+  //   if (oauth.data != null && !oauth.data.is_klip_linked) {
+  //     // SDK
+  //     const klipSdk = require('../static/klipSDK-2.0.1.min');
+  //     const bappName = 'Moment';
+  //     const res = klipSdk.prepare.auth({ bappName }).then(value => {
+  //       klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
+  //       const interval = setInterval(
+  //         args =>
+  //           klipSdk.getResult(value.request_key).then(result => {
+  //             console.log('result: ', result.status);
+  //             if (result.status === 'completed') {
+  //               clearInterval(interval);
+  //               alert(`Address: ${result.result.klaytn_address}`);
+  //               setAdd(result.result.klaytn_address);
+  //             }
+  //           }),
+  //         3000,
+  //       );
+  //     });
+  //
+  //     if (res.err) {
+  //       // 에러 처리
+  //     } else if (res.request_key) {
+  //       // request_key 보관
+  //     }
+  //   }
+  // }, [oauth.data]);
+
   useEffect(() => {
     if (token == null) {
       router.push('/login');
@@ -44,7 +76,7 @@ export default function setting() {
               <Typography variant="h5">{user.nickname}</Typography>
             </Box>
           </Box>
-          <NftModal handleClose={handleClose} handleOpen={open} klaytnAddres={user.klaytn_addres} />
+          <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_addres} />
           <MenuBar
             title="지갑 주소 확인하기"
             onClick={() => {
@@ -66,6 +98,7 @@ export default function setting() {
               console.log('Removed!');
             }}
           />
+          <div>{`add: ${add}`}</div>
         </>
       )}
     </Box>

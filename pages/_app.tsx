@@ -14,11 +14,27 @@ import Paper from '@mui/material/Paper';
 import store from '../store';
 import '../styles/globals.css';
 import { Link } from '@mui/material';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [value, setValue] = React.useState('Home');
+  // <Link href="/Map">
+  // </Link>
+  // <Link href="/tours">
+  // </Link>
+  // <Link href="/nft">
+  // </Link>
+  // <Link href="/setting">
+  // </Link>
+  const router = useRouter();
+  // useEffect(() => {
+  //   router.push(`/${value}`);
+  // }, [value]);
+
+  const pushTo = path => router.push(`/${path}`);
 
   return (
     <Provider store={store}>
@@ -39,18 +55,20 @@ function MyApp({ Component, pageProps }: AppProps) {
               }}
               style={{ maxWidth: 388 }}
             >
-              <Link href="/Map">
-                <BottomNavigationAction value="home" label="" icon={<HomeIcon />} />
-              </Link>
-              <Link href="/tours">
-                <BottomNavigationAction value="tour" label="" icon={<PhotoCameraIcon />} />
-              </Link>
-              <Link href="/nft">
-                <BottomNavigationAction value="nft" label="" icon={<PhotoLibraryIcon />} />
-              </Link>
-              <Link href="/setting">
-                <BottomNavigationAction value="setting" label="" icon={<SettingIcon />} />
-              </Link>
+              <BottomNavigationAction value="home" label="" icon={<HomeIcon />} onClick={() => pushTo('Map')} />
+              <BottomNavigationAction
+                value="tours"
+                label=""
+                icon={<PhotoCameraIcon />}
+                onClick={() => pushTo('tours')}
+              />
+              <BottomNavigationAction value="nft" label="" icon={<PhotoLibraryIcon />} onClick={() => pushTo('nft')} />
+              <BottomNavigationAction
+                value="setting"
+                label=""
+                icon={<SettingIcon />}
+                onClick={() => pushTo('setting')}
+              />
             </BottomNavigation>
           </Paper>
         </div>

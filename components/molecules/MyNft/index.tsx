@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { nanoid } from 'nanoid';
 import INft from '../../../models/nft/INft';
 import LazyLoadingImage from '../../atoms/LazyLoadingImage';
 
@@ -15,9 +16,7 @@ export default function MyNft(props: MyNftProps) {
     <div className="flex flex-wrap box-border overflow-y-scroll">
       <div className="grid grid-cols-3 gap-2">
         {nftList.map(nftData => (
-          <>
-            <NftCard nftData={nftData} />
-          </>
+          <NftCard nftData={nftData} key={nanoid()} />
         ))}
       </div>
     </div>
