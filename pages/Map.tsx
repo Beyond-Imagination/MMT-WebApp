@@ -53,7 +53,7 @@ export default function MapScreen() {
     dispatch(loginUser());
   }, []);
   useEffect(() => {
-    if (token == null) {
+    if (token === null) {
       router.push('/login');
     }
   }, [isLoggedIn, token]);
@@ -92,7 +92,7 @@ export default function MapScreen() {
           lat: 33.450701,
           lng: 126.570667,
         }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', zIndex: 1 }}
         level={3}
       >
         {MapMarkerList}

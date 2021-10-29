@@ -18,7 +18,6 @@ export default function TabPanel(props: TabPanelProps) {
       hidden={current !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      style={{ overflow: 'hidden', padding: 0 }}
       {...other}
     >
       {current === index && (

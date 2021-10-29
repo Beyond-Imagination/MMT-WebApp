@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import INft from '../../../models/nft/INft';
+import LazyLoadingImage from '../../atoms/LazyLoadingImage';
 
 interface MyNftProps {
   children?: React.ReactNode;
@@ -11,10 +12,14 @@ export default function MyNft(props: MyNftProps) {
   const { children, nftList, ...other } = props;
 
   return (
-    <div className="test2" style={{ display: 'flex', flexWrap: 'wrap', boxSizing: 'border-box', overflow: 'scroll' }}>
-      {nftList.map(nftData => (
-        <NftCard nftData={nftData} />
-      ))}
+    <div className="flex flex-wrap box-border overflow-y-scroll">
+      <div className="grid grid-cols-3 gap-2">
+        {nftList.map(nftData => (
+          <>
+            <NftCard nftData={nftData} />
+          </>
+        ))}
+      </div>
     </div>
   );
 }
@@ -27,10 +32,15 @@ function NftCard(props: INftCard) {
   const { nftData, ...other } = props;
 
   return (
-    <Link href={`/nft/${nftData.nftId}`}>
-      <div style={{ width: '33%', padding: 5 }}>
-        <img src={nftData.image} alt="" style={{ width: '100%' }} />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>{nftData.title}</div>
+    <Link href={`/nft/${nftData.nftId}`} key={nftData.nftId}>
+      <div className="w-full">
+        <LazyLoadingImage
+          src={nftData.image}
+          className="rounded-lg shadow-lg object-cover object-center w-full h-28 mb-2"
+        />
+        <div className="flex text-center justify-center items-center px-2 pb-2" style={{ wordBreak: 'keep-all' }}>
+          {nftData.title}
+        </div>
       </div>
     </Link>
   );

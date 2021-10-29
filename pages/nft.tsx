@@ -43,15 +43,17 @@ export default function nft() {
   }, [dispatch]);
 
   return (
-    <Box className="nft" sx={{ width: '100%', backgroundColor: 'white' }}>
+    <div className="w-full bg-white">
       <Tabs values={tabs} current={current} handleChange={handleChange} />
       {nftList.loading || nftList.data.length === 0 ? (
-        <Loading />
+        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Loading />
+        </div>
       ) : (
         <TabPanel current={current} index={0}>
           <MyNft nftList={nftList.data} />
         </TabPanel>
       )}
-    </Box>
+    </div>
   );
 }
