@@ -37,6 +37,7 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <script type="text/javascript" src={kakaoScriptSrc} />
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js" />
+          <script src="../static/klipSDK-2.0.0.min.js" />
         </Head>
         <body className="flex justify-center items-center w-full h-full bg-gray-300">
           <div className="screen">

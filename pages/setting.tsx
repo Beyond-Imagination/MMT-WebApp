@@ -15,9 +15,26 @@ export default function setting() {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const handleClose = () => setOpen(false);
+
   useEffect(() => {
     dispatch(loginUser());
   }, []);
+
+  useEffect(() => {
+    if (oauth.data != null && !oauth.data.is_klip_linked) {
+      const klipSdk = require('../static/klipSDK-2.0.1.min');
+      const bappName = 'Moment';
+      const successLink = 'localhost:4005/setting';
+      const failLink = 'localhost:4005/setting';
+      const res = klipSdk.prepare.auth({ bappName, successLink, failLink }).then(value => value);
+      if (res.err) {
+        // 에러 처리
+      } else if (res.request_key) {
+        // request_key 보관
+      }
+    }
+  }, [oauth.data]);
+
   useEffect(() => {
     if (token == null) {
       router.push('/login');
@@ -44,7 +61,7 @@ export default function setting() {
               <Typography variant="h5">{user.nickname}</Typography>
             </Box>
           </Box>
-          <NftModal handleClose={handleClose} handleOpen={open} klaytnAddres={user.klaytn_addres} />
+          <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_addres} />
           <MenuBar
             title="지갑 주소 확인하기"
             onClick={() => {
