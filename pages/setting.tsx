@@ -26,9 +26,20 @@ export default function setting() {
       // SDK
       const klipSdk = require('../static/klipSDK-2.0.1.min');
       const bappName = 'Moment';
-      const res = klipSdk.prepare
-        .auth({ bappName })
-        .then(value => klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요')));
+      const res = klipSdk.prepare.auth({ bappName }).then(value => {
+        klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
+        const interval = setInterval(
+          args =>
+            klipSdk.getResult(value.request_key).then(result => {
+              console.log('result: ', result.status);
+              if (result.status === 'completed') {
+                clearInterval(interval);
+                alert(`Address: ${result.result.klaytn_address}`);
+              }
+            }),
+          3000,
+        );
+      });
 
       // axios
       const req = {
