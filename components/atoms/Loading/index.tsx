@@ -1,18 +1,10 @@
 import { CircularProgress } from '@mui/material';
 import * as React from 'react';
-import styled from 'styled-components';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
 export default function Loading() {
   return (
-    <Container>
+    <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <CircularProgress />
-    </Container>
+    </div>
   );
 }

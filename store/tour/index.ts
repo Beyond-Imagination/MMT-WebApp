@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchTourDetail, fetchTourList } from '../../core/apis/tour';
 import { IAsyncState } from '../../models/IAsyncState';
 import ITour, { CommonApi, ITourApi, ITourDetail } from '../../models/tour/ITour';
+import { RootState } from "../index";
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'tour';
@@ -63,5 +64,9 @@ const tourSlice = createSlice({
     },
   },
 });
+
+export const tourActions = {
+  ...tourSlice.actions,
+};
 
 export default tourSlice;

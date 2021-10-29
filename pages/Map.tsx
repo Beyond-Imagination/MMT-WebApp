@@ -6,6 +6,9 @@ import MapCard from '../components/molecules/MapCard';
 import useAuth from '../components/common/Authentication';
 import { RootState } from '../store';
 import { loginUser } from '../store/user';
+import { getNftList, nftActions } from "../store/nft";
+import { getTourList, tourActions } from "../store/tour";
+import ITour from "../models/tour/ITour";
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -58,6 +61,12 @@ export default function MapScreen() {
     }
   }, [isLoggedIn, token]);
 
+  useEffect(() => {
+    dispatch(getTourList({}));
+  }, [dispatch]);
+
+  const { data } = useSelector((root: RootState) => root.tour.tours);
+
   const toggleShow = (item: IMapItem) => {
     const index = items.findIndex(x => x.id === item.id);
     item.show = !item.show;
@@ -65,9 +74,16 @@ export default function MapScreen() {
     setItems([...items.slice(0, index), item, ...items.slice(index + 1)]);
   };
 
-  const Auth = useAuth();
+  const removeBackground = () => {
+    const infoWindows = Array.from(document.getElementsByClassName('infoWindow'));
+    infoWindows.forEach(infoWindow => {
+      const targetElement = infoWindow.parentElement.parentElement;
+      targetElement.style.border = 'none';
+      targetElement.style.background = 'none';
+    });
+  };
 
-  const MapMarkerList = items.map(item => (
+  const MapMarkerList = data.map((item: ITour) => (
     <MapMarker
       position={{
         lat: item.lat,
@@ -76,6 +92,7 @@ export default function MapScreen() {
       key={item.id}
       clickable
       onClick={() => toggleShow(item)}
+      onCreate={() => removeBackground()}
       infoWindowOptions={{
         className: 'infoWindow',
         style: infoWindowStyle,

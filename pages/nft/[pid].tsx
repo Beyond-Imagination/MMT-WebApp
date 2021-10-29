@@ -1,20 +1,13 @@
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Box, styled, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import * as React from 'react';
 import { nftActions } from '../../store/nft';
 import { RootState } from '../../store';
 import { Loading } from '../../components/atoms';
 import LazyLoadingImage from '../../components/atoms/LazyLoadingImage';
 
-const ContentContainer = styled('div')`
-  display: flex;
-  padding: 5px 25px;
-`;
-const ContentTitle = styled('div')`
-  width: 85px;
-`;
 const NftDetail = () => {
   const router = useRouter();
   const { pid } = router.query;
@@ -26,7 +19,7 @@ const NftDetail = () => {
     dispatch(nftActions.setSelected(pid));
   }, [dispatch, router]);
 
-  if (nft === undefined) {
+  if (!nft) {
     return <Loading />;
   }
   return (
