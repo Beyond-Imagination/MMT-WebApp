@@ -23,20 +23,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={client}>
-        <Box sx={{ pb: 7, width: '100%', height: '100%' }}>
-          <div className="page">
+        <div className="w-full h-full relative">
+          <div className="w-full h-full relative" style={{ paddingBottom: '28px;' }}>
             <Component {...pageProps} />
           </div>
           <Paper
-            sx={{
-              position: 'fixed',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            className="fixed w-full right-0 bottom-0 left-0 flex justify-center items-center h-12 z-10"
             elevation={3}
           >
             <BottomNavigation
@@ -61,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               </Link>
             </BottomNavigation>
           </Paper>
-        </Box>
+        </div>
       </QueryClientProvider>
     </Provider>
   );

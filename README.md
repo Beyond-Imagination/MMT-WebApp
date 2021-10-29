@@ -128,7 +128,7 @@ project
 │   │   │   ├── dev.ts
 │   │   │   ├── stage.ts
 │   │   │   ├── prod.ts
-│   │   │   └── index.ts
+│   │   │   └── index.tsx
 │   │   ├── utils    # 각종 유틸 함수를 작성합니다.
 │   │   ├── hoc      # 공통 hoc 영역을 정의합니다.
 │   │   ├── hooks    # 공통 hook 파일을 정의 합니다.
@@ -141,9 +141,9 @@ project
 │   ├── static  # 이미지 파일 등 애셋을 정의합니다. 
 │   ├── store   # redux 스토어
 │   │   ├── module      #각 reducer 모음.
-│   │   │   ├── index.ts        # store의 config 설정 및 store에서 사용되는 rootType을 지정합니다.
+│   │   │   ├── index.tsx        # store의 config 설정 및 store에서 사용되는 rootType을 지정합니다.
 │   │   │   └── ....modules     #폴더 컨벤션은 서비스 도메인 단위로 구성하고 redux-toolkit의 slice를 기본으로 사용합니다.
-│   │   └── index.ts
+│   │   └── index.tsx
 │   │   
 │   └── styles // 스타일 영역을 정의합니다.
 │
@@ -435,7 +435,7 @@ form의 처리는 **유효성검사, state관리 등 form 처리는 생각보다
 redux는 최상위 store 파일에 각 서비스 도메인 단위로 redux파일을 생성합니다. 이때 모든 **redux파일은 ducks패턴의 가이드를 기반으로 만들어진 slice 를 기반으로 작성**합니다. 또한 **비동기데이터 핸들링을 목적으로 redux의 사용을 금지**합니다. **단순히 비동기에 대한 처리가 목적이라면 이는 `react-query`를 사용하여 처리**합니다.
 
 ### redux 스토어 설정 및 타입 위치
-redux의 설정파일 및 타입에 대한 위치는 store 폴더의 index.ts 에 구성합니다.
+redux의 설정파일 및 타입에 대한 위치는 store 폴더의 index.tsx 에 구성합니다.
 
 ```ts
 import thunk from 'redux-thunk';
@@ -458,7 +458,7 @@ export default initStore;
 
 ```
 
-해당 index.ts 에서 작성한 RootState는 컴포넌트에서 useSelector를 통한 값을 사용할때 type으로 사용합니다.
+해당 index.tsx 에서 작성한 RootState는 컴포넌트에서 useSelector를 통한 값을 사용할때 type으로 사용합니다.
 ```tsx
 
 function Component(){
@@ -469,7 +469,7 @@ function Component(){
 ```
 
 ### slice 작성 가이드
-slice의 폴더구성은 components 구성과 마찬가지로 `폴더이름 + index.ts 의 조합`으로 구성합니다. 또한 작성 순서는 다음 순서대로 작성하여 프로젝트 구성을 일관되게 처리합니다.
+slice의 폴더구성은 components 구성과 마찬가지로 `폴더이름 + index.tsx 의 조합`으로 구성합니다. 또한 작성 순서는 다음 순서대로 작성하여 프로젝트 구성을 일관되게 처리합니다.
 
 
 ```ts
