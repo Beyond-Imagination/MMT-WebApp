@@ -10,8 +10,8 @@ const name = 'tour';
 // 2. 비동기 핸들링이 필요한 경우 createAsyncThunk 를 사용하여 처리합니다.
 export const getTourList = createAsyncThunk(
   `${name}/getTourList`, // name은 reducer이름  + / + 함수명으로 구성합니다.
-  async ({ contentTypeId, arrange }: any) => {
-    return fetchTourList({ contentTypeId, arrange });
+  async ({ contentTypeId, arrange, mapX, mapY }: any) => {
+    return fetchTourList({ contentTypeId, arrange, mapX, mapY });
   },
 );
 

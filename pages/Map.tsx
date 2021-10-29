@@ -6,9 +6,11 @@ import MapCard from '../components/molecules/MapCard';
 import useAuth from '../components/common/Authentication';
 import { RootState } from '../store';
 import { loginUser } from '../store/user';
-import { getNftList, nftActions } from "../store/nft";
-import { getTourList, tourActions } from "../store/tour";
-import ITour from "../models/tour/ITour";
+import { getTourList } from '../store/tour';
+
+function getGeolocation(): Promise<GeolocationPosition> {
+  return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
+}
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -22,34 +24,19 @@ export interface IMapItem {
   title: string;
   imageUrl: string;
   distance: string;
+  contentTypeId: number;
   show: boolean;
 }
 
-const testItem: IMapItem[] = [
-  {
-    id: '경복궁 1',
-    lat: 33.450701,
-    lng: 126.570667,
-    title: '경복궁 1',
-    imageUrl: 'http://www.artinsight.co.kr/data/tmp/1804/79026ca47a77c48e37c1afb425b80566_RtxaVP4jOakhYzo6m2edDPv.jpg',
-    distance: '10.1km',
-    show: false,
-  },
-  {
-    id: '경복궁 2',
-    lat: 33.750701,
-    lng: 126.170667,
-    title: '경복궁 2',
-    imageUrl: 'http://www.artinsight.co.kr/data/tmp/1804/79026ca47a77c48e37c1afb425b80566_RtxaVP4jOakhYzo6m2edDPv.jpg',
-    distance: '10.1km',
-    show: false,
-  },
-];
-
 export default function MapScreen() {
-  const [items, setItems] = useState(testItem);
+  const [items, setItems] = useState([]);
+  const [mapCenter, setMapCenter] = useState({
+    lat: 37.575869,
+    lng: 126.976859,
+  });
   const router = useRouter();
   const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
+  const { data } = useSelector((root: RootState) => root.tour.tours);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,12 +47,30 @@ export default function MapScreen() {
       router.push('/login');
     }
   }, [isLoggedIn, token]);
+  useEffect(() => {
+    dispatch(
+      getTourList({
+        arrange: 'A',
+        contentTypeId: 12,
+        mapX: mapCenter.lng,
+        mapY: mapCenter.lat,
+      }),
+    );
+  }, [dispatch, mapCenter]);
 
   useEffect(() => {
-    dispatch(getTourList({}));
-  }, [dispatch]);
-
-  const { data } = useSelector((root: RootState) => root.tour.tours);
+    const mapItems: IMapItem[] = data.map(tour => ({
+      id: `${tour.content_id}`,
+      lat: tour.mapy,
+      lng: tour.mapx,
+      title: tour.title,
+      imageUrl: tour.image_url,
+      distance: '',
+      contentTypeId: tour.content_type_id,
+      show: false,
+    }));
+    setItems(mapItems);
+  }, [data]);
 
   const toggleShow = (item: IMapItem) => {
     const index = items.findIndex(x => x.id === item.id);
@@ -83,7 +88,22 @@ export default function MapScreen() {
     });
   };
 
-  const MapMarkerList = data.map((item: ITour) => (
+  const pushTo = (contentId, contentTypeId) => {
+    router.push(`/tours/${contentId}?contentTypeId=${contentTypeId}`);
+  };
+
+  const fetchLocation = async () => {
+    const geo = await getGeolocation();
+    const { latitude: lat, longitude: lng } = geo.coords;
+    setMapCenter({ lat, lng });
+  };
+
+  const onDragEnd = async (map, e) => {
+    const { La: lng, Ma: lat } = map.getCenter();
+    setMapCenter({ lat, lng });
+  };
+
+  const MapMarkerList = items.map((item: IMapItem) => (
     <MapMarker
       position={{
         lat: item.lat,
@@ -98,19 +118,31 @@ export default function MapScreen() {
         style: infoWindowStyle,
       }}
     >
-      {item.show && <MapCard imageUrl={item.imageUrl} title={item.title} distance={item.distance} />}
+      {item.show && (
+        <MapCard
+          imageUrl={item.imageUrl}
+          title={item.title}
+          distance={item.distance}
+          onClick={() => pushTo(item.id, item.contentTypeId)}
+        />
+      )}
     </MapMarker>
   ));
 
   return (
     <>
+      <button
+        className="fixed right-6 bottom-16 w-12 h-12 z-20 rounded-full border-2 border-indigo-500 bg-indigo-500 text-white"
+        type="button"
+        onClick={() => fetchLocation()}
+      >
+        위치
+      </button>
       <Map
-        center={{
-          lat: 33.450701,
-          lng: 126.570667,
-        }}
+        center={mapCenter}
         style={{ width: '100%', height: '100%', zIndex: 1 }}
-        level={3}
+        level={5}
+        onDragEnd={(map, e) => onDragEnd(map, e)}
       >
         {MapMarkerList}
       </Map>

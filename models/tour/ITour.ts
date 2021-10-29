@@ -4,6 +4,8 @@ export default interface ITour {
   image_url?: string; // 썸네일 이미지 주소 (약 160\*100 size)
   title: string; // 콘텐츠 제목
   overview?: string; // 콘텐츠 개요
+  mapx: number; //  longitude
+  mapy: number; //  latitude
 }
 
 export interface ITourApi {
@@ -37,5 +39,5 @@ export interface ITourDetail {
     | []; // 이미지
   normal_info: { title: string; content: string }[] | []; // 기본 정보
   info_info: { title: string; content: string }[] | []; // 소개 정보
-  detail_info: { title: string; content: string }[] | []; // 상세 정보
+  detail_info: { title: string; content: string }[] | []; // 상세 정보,
 }
