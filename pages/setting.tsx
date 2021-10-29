@@ -16,7 +16,7 @@ export default function setting() {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const handleClose = () => setOpen(false);
-
+  const [add, setAdd] = useState();
   useEffect(() => {
     dispatch(loginUser());
   }, []);
@@ -26,7 +26,8 @@ export default function setting() {
       // SDK
       const klipSdk = require('../static/klipSDK-2.0.1.min');
       const bappName = 'Moment';
-      const res = klipSdk.prepare.auth({ bappName }).then(value => {
+      const successLink = 'http://moment.beyond-imagination.ml/setting';
+      const res = klipSdk.prepare.auth({ bappName, successLink }).then(value => {
         klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
         const interval = setInterval(
           args =>
@@ -35,18 +36,12 @@ export default function setting() {
               if (result.status === 'completed') {
                 clearInterval(interval);
                 alert(`Address: ${result.result.klaytn_address}`);
+                setAdd(result.result.klaytn_address);
               }
             }),
           3000,
         );
       });
-
-      // axios
-      const req = {
-        bapp: { name: 'Moment' },
-        type: 'auth',
-      };
-      axios.post('https://a2a-api.klipwallet.com/v2/a2a/prepare', req);
 
       if (res.err) {
         // 에러 처리
@@ -104,6 +99,7 @@ export default function setting() {
               console.log('Removed!');
             }}
           />
+          <div>{`add: ${add}`}</div>
         </>
       )}
     </Box>
