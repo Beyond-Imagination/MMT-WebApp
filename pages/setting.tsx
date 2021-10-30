@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import dynamic from 'next/dynamic';
 import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
@@ -21,34 +21,34 @@ export default function setting() {
     dispatch(loginUser());
   }, []);
 
-  // useEffect(() => {
-  //   if (oauth.data != null && !oauth.data.is_klip_linked) {
-  //     // SDK
-  //     const klipSdk = require('../static/klipSDK-2.0.1.min');
-  //     const bappName = 'Moment';
-  //     const res = klipSdk.prepare.auth({ bappName }).then(value => {
-  //       klipSdk.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
-  //       const interval = setInterval(
-  //         args =>
-  //           klipSdk.getResult(value.request_key).then(result => {
-  //             console.log('result: ', result.status);
-  //             if (result.status === 'completed') {
-  //               clearInterval(interval);
-  //               alert(`Address: ${result.result.klaytn_address}`);
-  //               setAdd(result.result.klaytn_address);
-  //             }
-  //           }),
-  //         3000,
-  //       );
-  //     });
-  //
-  //     if (res.err) {
-  //       // 에러 처리
-  //     } else if (res.request_key) {
-  //       // request_key 보관
-  //     }
-  //   }
-  // }, [oauth.data]);
+  useEffect(() => {
+    console.log(klipSDK);
+    if (oauth.data !== null && !oauth.data.is_klip_linked) {
+      // SDK
+      const bappName = 'Moment';
+      const res = klipSDK.prepare.auth({ bappName }).then(value => {
+        klipSDK.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
+        const interval = setInterval(
+          args =>
+            klipSDK.getResult(value.request_key).then(result => {
+              console.log('result: ', result.status);
+              if (result.status === 'completed') {
+                clearInterval(interval);
+                alert(`Address: ${result.result.klaytn_address}`);
+                setAdd(result.result.klaytn_address);
+              }
+            }),
+          3000,
+        );
+      });
+
+      if (res.err) {
+        // 에러 처리
+      } else if (res.request_key) {
+        // request_key 보관
+      }
+    }
+  }, [oauth.data]);
 
   useEffect(() => {
     if (token == null) {
@@ -63,45 +63,47 @@ export default function setting() {
   }, [dispatch, isLoggedIn]);
 
   return (
-    <Box sx={{ backgroundColor: 'white', width: '100%' }}>
-      {!isLoggedIn || user == null ? (
-        <Loading />
-      ) : (
-        <>
-          <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
-            <Box>
-              <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
+    <>
+      <Box sx={{ backgroundColor: 'white', width: '100%' }}>
+        {!isLoggedIn || user == null ? (
+          <Loading />
+        ) : (
+          <>
+            <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
+              <Box>
+                <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
+              </Box>
+              <Box sx={{ paddingLeft: 2 }}>
+                <Typography variant="h5">{user.nickname}</Typography>
+              </Box>
             </Box>
-            <Box sx={{ paddingLeft: 2 }}>
-              <Typography variant="h5">{user.nickname}</Typography>
-            </Box>
-          </Box>
-          <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_addres} />
-          <MenuBar
-            title="지갑 주소 확인하기"
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-          <MenuBar
-            title="NFT 토큰"
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-          <MenuBar
-            title="로그아웃"
-            onClick={() => {
-              localStorage.clear();
-              dispatch(userActions.logout());
-              router.push('/login');
-              console.log('Removed!');
-            }}
-          />
-          <div>{`add: ${add}`}</div>
-        </>
-      )}
-    </Box>
+            <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_addres} />
+            <MenuBar
+              title="지갑 주소 확인하기"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+            <MenuBar
+              title="NFT 토큰"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+            <MenuBar
+              title="로그아웃"
+              onClick={() => {
+                localStorage.clear();
+                dispatch(userActions.logout());
+                router.push('/login');
+                console.log('Removed!');
+              }}
+            />
+            <div>{`add: ${add}`}</div>
+          </>
+        )}
+      </Box>
+    </>
   );
 }
 
