@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from 'react';
 import { Chip, Link, Stack } from '@mui/material';
 import { TabPanel, Tabs } from '../components/molecules';
 import TourPanel from '../components/atoms/TourPanel';
@@ -10,7 +10,6 @@ import { getTourList } from '../store/tour';
 import Loading from '../components/atoms/Loading';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
-import delay from '../core/utils/delay';
 
 const tabs = [
   {
@@ -117,7 +116,7 @@ function tours() {
       </Stack>
       <Box style={{ overflow: 'scroll', height: '88%', paddingTop: 0 }}>
         <TabPanel current={current} index={current}>
-          {loading ? (
+          {loading || !updatedLocation ? (
             <Loading />
           ) : (
             data.map(value => (

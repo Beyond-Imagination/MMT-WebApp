@@ -51,7 +51,7 @@ export default function TourPanel(props: ITour) {
           </Typography>
           <ContentContainer>
             <Typography variant="body2" gutterBottom component="div">
-              {overview}
+              {overview.replace(/(<([^>]+)>)/gi, '')}
             </Typography>
           </ContentContainer>
         </div>
