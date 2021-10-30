@@ -10,6 +10,7 @@ import { getTourList } from '../store/tour';
 import Loading from '../components/atoms/Loading';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
+import TitleBar from "../components/molecules/TitleBar";
 
 const tabs = [
   {
@@ -92,7 +93,8 @@ function tours() {
   };
 
   return (
-    <Box className="content-container" style={{ height: '100%', backgroundColor: 'white' }}>
+    <div className="bg-white w-full h-full">
+      <TitleBar title="투어 리스트" useBackBtn={false} />
       <Box sx={{ mb: 1 }}>
         <Tabs values={tabs} current={current} handleChange={handleChange} />
       </Box>
@@ -132,7 +134,7 @@ function tours() {
           )}
         </TabPanel>
       </Box>
-    </Box>
+    </div>
   );
 }
 

@@ -104,3 +104,7 @@ p:empty:before {
     content: ' ';
     white-space: pre;
 }
+
+button:focus {
+    outline: 0;
+}

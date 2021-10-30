@@ -37,7 +37,7 @@ export interface ITourDetail {
         small_img_url?: string; // 썸네일 이미지
       }[]
     | []; // 이미지
-  normal_info: { title: string; content: string }[] | []; // 기본 정보
-  info_info: { title: string; content: string }[] | []; // 소개 정보
-  detail_info: { title: string; content: string }[] | []; // 상세 정보,
+  normal_info: { title: string; content: string }[]; // 기본 정보
+  info_info: { title: string; content: string }[]; // 소개 정보
+  detail_info: { title: string; content: string }[]; // 상세 정보,
 }
