@@ -7,8 +7,8 @@ import { RootState } from '../store';
 import { getTourList } from '../store/tour';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
-import TitleBar from "../components/molecules/TitleBar";
 import * as React from "react";
+import delay from "../core/utils/delay";
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -27,25 +27,62 @@ export interface IMapItem {
 }
 
 export default function MapScreen() {
-  const [items, setItems] = useState([]);
-  const { mapCenter, setMapCenter, fetchLocation } = useLocation();
   const router = useRouter();
-  const { data } = useSelector((root: RootState) => root.tour.tours);
   const dispatch = useDispatch();
+
+  const [items, setItems] = useState([]);
+  const [firstUpdated, setFirstUpdated] = useState(false);
+  const [kakaoMap, setKakaoMap] = useState<kakao.maps.Map>();
+  const [initializedKakaoMap, setInitializedKakaoMap] = useState(false);
+  const { mapCenter, setMapCenter, fetchLocation } = useLocation();
+  const { data } = useSelector((root: RootState) => root.tour.tours);
 
   useAuthenticated();
   useEffect(() => {
-    dispatch(
-      getTourList({
-        mapX: mapCenter.lng,
-        mapY: mapCenter.lat,
-        radius: 1500,
-        pageNo: 1,
-        numOfRows: 100,
-        overview: false,
-      }),
-    );
-  }, [dispatch, mapCenter]);
+    const wrap = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const lat = Number(params.get('lat'));
+      const lng = Number(params.get('lng'));
+      if (!Number.isNaN(lng) && !Number.isNaN(lat) && lat > 0 && lng > 0) {
+        await setMapCenter({ lat, lng });
+      }
+      await setFirstUpdated(true);
+    };
+    wrap();
+  }, []);
+
+  useEffect(() => {
+    if (firstUpdated && initializedKakaoMap) {
+      kakaoMap.setCenter(new kakao.maps.LatLng(mapCenter.lat, mapCenter.lng));
+    }
+  }, [firstUpdated, initializedKakaoMap]);
+
+  useEffect(() => {
+    if (firstUpdated) {
+      const { basePath } = router;
+      router.replace(`${basePath}/Map?lat=${mapCenter.lat}&lng=${mapCenter.lng}`);
+    }
+  }, [mapCenter]);
+
+  useEffect(() => {
+    const wrap = async () => {
+      const { lng, lat } = router.query;
+      if (firstUpdated) {
+        await dispatch(
+          getTourList({
+            mapX: Number(lng),
+            mapY: Number(lat),
+            radius: 1500,
+            pageNo: 1,
+            numOfRows: 100,
+            overview: false,
+          }),
+        );
+        await setFirstUpdated(true);
+      }
+    };
+    wrap();
+  }, [router.query]);
 
   useEffect(() => {
     const mapItems: IMapItem[] = data.map(tour => ({
@@ -82,8 +119,16 @@ export default function MapScreen() {
   };
 
   const onDragEnd = async (map, e) => {
-    const { La: lng, Ma: lat } = map.getCenter();
-    setMapCenter({ lat, lng });
+    const { La, Ma } = map.getCenter();
+    await setMapCenter({ lat: Ma, lng: La });
+  };
+
+  const onCreatedMap = (map: kakao.maps.Map) => {
+    const wrap = async () => {
+      await setKakaoMap(map);
+      await setInitializedKakaoMap(true);
+    };
+    wrap();
   };
 
   const MapMarkerList = items.map((item: IMapItem) => (
@@ -115,17 +160,18 @@ export default function MapScreen() {
   return (
     <div className="relative w-full h-full">
       <button
-        className="fixed right-6 bottom-16 w-12 h-12 z-20 rounded-full border-2 border-indigo-500 bg-indigo-500 text-white"
+        className="fixed right-6 bottom-16 w-10 h-10 z-20 rounded-full outline-none border-2"
         type="button"
         onClick={() => fetchLocation()}
       >
-        위치
+        <img className="w-10 h-10 mx-auto rounded-full bg-white outline-none" alt="gps icon" src="../static/gps.png" />
       </button>
       <Map
         center={mapCenter}
         style={{ width: '100%', height: '100%', zIndex: 1 }}
         level={4}
         onDragEnd={(map, e) => onDragEnd(map, e)}
+        onCreate={map => onCreatedMap(map)}
       >
         {MapMarkerList}
       </Map>
