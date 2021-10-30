@@ -3,14 +3,10 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import MapCard from '../components/molecules/MapCard';
-import useAuth from '../components/common/Authentication';
 import { RootState } from '../store';
-import { loginUser } from '../store/user';
 import { getTourList } from '../store/tour';
-
-function getGeolocation(): Promise<GeolocationPosition> {
-  return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
-}
+import useAuthenticated from '../hooks/useAuthenticated';
+import useLocation from '../hooks/useLocation';
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -30,30 +26,21 @@ export interface IMapItem {
 
 export default function MapScreen() {
   const [items, setItems] = useState([]);
-  const [mapCenter, setMapCenter] = useState({
-    lat: 37.575869,
-    lng: 126.976859,
-  });
+  const { mapCenter, setMapCenter, fetchLocation } = useLocation();
   const router = useRouter();
-  const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
   const { data } = useSelector((root: RootState) => root.tour.tours);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loginUser());
-  }, []);
-  useEffect(() => {
-    if (token === null) {
-      router.push('/login');
-    }
-  }, [isLoggedIn, token]);
+  useAuthenticated();
   useEffect(() => {
     dispatch(
       getTourList({
-        arrange: 'A',
-        contentTypeId: 12,
         mapX: mapCenter.lng,
         mapY: mapCenter.lat,
+        radius: 1500,
+        pageNo: 1,
+        numOfRows: 100,
+        overview: false,
       }),
     );
   }, [dispatch, mapCenter]);
@@ -92,12 +79,6 @@ export default function MapScreen() {
     router.push(`/tours/${contentId}?contentTypeId=${contentTypeId}`);
   };
 
-  const fetchLocation = async () => {
-    const geo = await getGeolocation();
-    const { latitude: lat, longitude: lng } = geo.coords;
-    setMapCenter({ lat, lng });
-  };
-
   const onDragEnd = async (map, e) => {
     const { La: lng, Ma: lat } = map.getCenter();
     setMapCenter({ lat, lng });
@@ -122,8 +103,8 @@ export default function MapScreen() {
         <MapCard
           imageUrl={item.imageUrl}
           title={item.title}
-          distance={item.distance}
           onClick={() => pushTo(item.id, item.contentTypeId)}
+          show={item.show}
         />
       )}
     </MapMarker>
@@ -141,7 +122,7 @@ export default function MapScreen() {
       <Map
         center={mapCenter}
         style={{ width: '100%', height: '100%', zIndex: 1 }}
-        level={5}
+        level={4}
         onDragEnd={(map, e) => onDragEnd(map, e)}
       >
         {MapMarkerList}

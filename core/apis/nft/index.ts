@@ -11,9 +11,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 1,
         image: `http://tong.visitkorea.or.kr/cms/resource/52/1607952_image2_1.jpg`, // image link
         title: '봄기운이 느껴진 여의도', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '2',
@@ -21,9 +23,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/29/2482729_image2_1.jpg`, // image link
         title: '모세의 기적을 본 날', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '3',
@@ -31,9 +35,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/05/2714505_image2_1.jpg`, // image link
         title: '창덕궁 달빛기행 사진', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '4',
@@ -41,9 +47,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/78/1992778_image2_1.jpg`, // image link
         title: '맛있는 초밥', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '5',
@@ -51,9 +59,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/16/2387516_image2_1.jpg`, // image link
         title: '아름다운 사천의 신수도', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '6',
@@ -61,9 +71,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/60/2761360_image2_1.jpg`, // image link
         title: '개미허리아치교', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '7',
@@ -71,9 +83,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/43/183243_image2_1.jpg`, // image link
         title: '울진의 망양정', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '8',
@@ -81,9 +95,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/49/2689849_image2_1.png`, // image link
         title: '진주시 남강유등축제', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '9',
@@ -91,9 +107,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `http://tong.visitkorea.or.kr/cms/resource/21/2689521_image2_1.jpg`, // image link
         title: '아침고요 수목원 저녁에', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '10',
@@ -101,9 +119,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '11',
@@ -111,9 +131,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '12',
@@ -121,9 +143,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '13',
@@ -131,9 +155,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '14',
@@ -141,9 +167,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '15',
@@ -151,9 +179,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '16',
@@ -161,9 +191,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '17',
@@ -171,9 +203,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '18',
@@ -181,9 +215,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '19',
@@ -191,9 +227,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '20',
@@ -201,9 +239,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '21',
@@ -211,9 +251,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '22',
@@ -221,9 +263,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '23',
@@ -231,9 +275,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '24',
@@ -241,9 +287,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
       {
         _id: '25',
@@ -251,9 +299,11 @@ export async function fetchNftList(): Promise<INftApi> {
         nftId: 2,
         image: `https://picsum.photos/200/200?random=${Math.random()}`, // image link
         title: 'title', // nft의 관광지 title
-        weather: 'good', // nft 발급 당시 날씨
-        emotion: 'good', // nft 발급 당시 유저 기분
-        impression: 'good', // nft 발급 당시 소감
+        weather:
+          '대통령은 제4항과 제5항의 규정에 의하여 확정된 법률을 지체없이 공포하여야 한다. 제5항에 의하여 법률이 확정된 후 또는 제4항에 의한 확정법률이 정부에 이송된 후 5일 이내에 대통령이 공포하지 아니할 때에는 국회의장이 이를 공포한다.', // nft 발급 당시 날씨
+        emotion: '국회는 정부의 동의없이 정부가 제출한 지출예산 각항의 금액을 증가하거나 새 비목을 설치할 수 없다.', // nft 발급 당시 유저 기분
+        impression:
+          '대통령은 취임에 즈음하여 다음의 선서를 한다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다.', // nft 발급 당시 소감
       },
     ],
   } as INftApi;

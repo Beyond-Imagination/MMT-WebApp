@@ -1,17 +1,19 @@
 import axios from 'axios';
-import { CommonApi, ITourApi, ITourDetail } from '../../../models/tour/ITour';
 import callAPI from '../../../helpers/apiCaller';
+import { CommonApi, ITourApi, ITourDetail } from '../../../models/tour/ITour';
 
-export async function fetchTourList({ contentTypeId, arrange, mapX, mapY }: any): Promise<CommonApi<ITourApi>> {
-  const tourResult = await callAPI('get', '/api/tour', {
-    numOfRows: 10,
-    pageNo: 1,
-    arrange,
-    contentTypeId,
-    mapX,
-    mapY,
-    radius: 1000,
-  });
+export interface IFetchTourListParams {
+  numOfRows: number;
+  pageNo: number;
+  arrange?: 'A' | 'B' | 'C' | 'D' | 'E' | 'O' | 'P' | 'Q' | 'R' | 'S';
+  contentTypeId?: number;
+  mapX: number;
+  mapY: number;
+  radius: number;
+  overview: boolean;
+}
+export async function fetchTourList(params: IFetchTourListParams): Promise<CommonApi<ITourApi>> {
+  const tourResult = await callAPI('get', '/api/tour', params);
   return tourResult;
 }
 

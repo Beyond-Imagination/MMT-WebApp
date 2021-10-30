@@ -38,7 +38,14 @@ export default function Image({ src, className }: IProps) {
     }
   }, []);
 
-  return <img ref={imgRef} src={isLoad ? src : '../../../static/placeholder.jpg'} alt="" className={className || ''} />;
+  return (
+    <img
+      ref={imgRef}
+      src={isLoad ? src || '../../../static/placeholder.jpg' : '../../../static/placeholder.jpg'}
+      alt=""
+      className={className || ''}
+    />
+  );
 }
 
 let observer: IntersectionObserver | null = null;

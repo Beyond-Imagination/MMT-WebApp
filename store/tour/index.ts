@@ -1,8 +1,7 @@
-import { createAsyncThunk, createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchTourDetail, fetchTourList } from '../../core/apis/tour';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchTourDetail, fetchTourList, IFetchTourListParams } from '../../core/apis/tour';
 import { IAsyncState } from '../../models/IAsyncState';
-import ITour, { CommonApi, ITourApi, ITourDetail } from '../../models/tour/ITour';
-import { RootState } from "../index";
+import ITour, { ITourApi, ITourDetail } from '../../models/tour/ITour';
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'tour';
@@ -10,8 +9,8 @@ const name = 'tour';
 // 2. 비동기 핸들링이 필요한 경우 createAsyncThunk 를 사용하여 처리합니다.
 export const getTourList = createAsyncThunk(
   `${name}/getTourList`, // name은 reducer이름  + / + 함수명으로 구성합니다.
-  async ({ contentTypeId, arrange, mapX, mapY }: any) => {
-    return fetchTourList({ contentTypeId, arrange, mapX, mapY });
+  async (params: IFetchTourListParams) => {
+    return fetchTourList(params);
   },
 );
 

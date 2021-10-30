@@ -9,43 +9,38 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import SettingIcon from '@mui/icons-material/Settings';
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import store from '../store';
 import '../styles/globals.css';
 import { Link } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import store from '../store';
 
 const client = new QueryClient();
+const BOTTOM_NAV_HIDE_LIST = ['/login'];
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [value, setValue] = React.useState('Home');
-  // <Link href="/Map">
-  // </Link>
-  // <Link href="/tours">
-  // </Link>
-  // <Link href="/nft">
-  // </Link>
-  // <Link href="/setting">
-  // </Link>
+  const [hideBottomNav, setHideBottomNav] = useState(true);
   const router = useRouter();
-  // useEffect(() => {
-  //   router.push(`/${value}`);
-  // }, [value]);
-
   const pushTo = path => router.push(`/${path}`);
+
+  useEffect(() => {
+    const path = router.pathname.toLowerCase();
+    setHideBottomNav(BOTTOM_NAV_HIDE_LIST.some(x => path === x));
+  }, [router.pathname]);
 
   return (
     <Provider store={store}>
       <QueryClientProvider client={client}>
-        <div className="w-full h-full relative">
-          <div className="w-full h-full relative" style={{ paddingBottom: '28px;' }}>
+        <div className="w-full h-full">
+          <div className="w-full relative" style={{ height: 'calc(100% - 56px)' }}>
             <Component {...pageProps} />
           </div>
           <Paper
-            className="fixed w-full right-0 bottom-0 left-0 flex justify-center items-center h-12 z-10"
+            className="fixed w-full right-0 bottom-0 left-0 flex justify-center items-center h-14 z-10"
             elevation={3}
+            style={{ visibility: hideBottomNav ? 'hidden' : 'visible' }}
           >
             <BottomNavigation
               showLabels

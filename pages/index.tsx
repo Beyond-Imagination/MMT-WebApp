@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { useEffect } from 'react';
 import MapScreen from './Map';
-import useStorage from '../hooks/useStorage';
 import { RootState } from '../store';
 
 function Home() {

@@ -26,32 +26,24 @@ function loginWithKakao(): Promise<string> {
 }
 
 export default function loginScreen() {
-  const [accessToken, setAccessToken] = useState('');
   const router = useRouter();
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const handleKakaoLogin = async () => {
-    try {
-      const result = await loginWithKakao();
-      useStorage().localStorage.setItem('KAKAO_ACCESS_TOKEN', result);
-      setAccessToken(result);
+    const result = await loginWithKakao();
+    useStorage().localStorage.setItem('KAKAO_ACCESS_TOKEN', result);
 
-      const loginResult = await callAPI('post', '/api/users/login', {
-        access_token: result,
-      });
+    const loginResult = await callAPI('post', '/api/users/login', {
+      access_token: result,
+    });
 
-      console.log('loginResult: ', loginResult);
-      dispatch(userActions.saveToken(loginResult));
-    } catch (e) {
-      console.error(e);
-    }
+    dispatch(userActions.saveToken(loginResult));
   };
 
   useEffect(() => {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('1fa3d84c220e7a4cbc19ac98ad079f9a');
     }
-    // handleKakaoLogin();
   });
 
   if (isLoggedIn) {
@@ -59,18 +51,21 @@ export default function loginScreen() {
   }
 
   return (
-    <div style={{ height: '100%', paddingTop: 128 }}>
-      {/* <div>Hello Access Token</div> */}
-      {/* <div>{accessToken.length > 0 && <div>access: {accessToken}</div>}</div> */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src="../static/logo.png" alt="" style={{ height: 240 }} />
+    <>
+      <div style={{ height: '100%', paddingTop: 128 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src="../static/logo.png" alt="" style={{ height: 240 }} />
+        </div>
       </div>
-      <div
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 40 }}
+
+      <button
+        type="button"
+        className="fixed bottom-12 left-0 right-0 mx-auto"
         onClick={handleKakaoLogin}
+        style={{ width: '300px', height: '45px' }}
       >
-        <img src="../static/kakao_login_large_wide.png" alt="" style={{ height: 50 }} />
-      </div>
-    </div>
+        <img className="w-full h-full" src="../static/kakao_login_large_wide.png" alt="" />
+      </button>
+    </>
   );
 }
