@@ -7,6 +7,8 @@ import { RootState } from '../store';
 import { getTourList } from '../store/tour';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
+import TitleBar from "../components/molecules/TitleBar";
+import * as React from "react";
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -111,7 +113,7 @@ export default function MapScreen() {
   ));
 
   return (
-    <>
+    <div className="relative w-full h-full">
       <button
         className="fixed right-6 bottom-16 w-12 h-12 z-20 rounded-full border-2 border-indigo-500 bg-indigo-500 text-white"
         type="button"
@@ -127,6 +129,6 @@ export default function MapScreen() {
       >
         {MapMarkerList}
       </Map>
-    </>
+    </div>
   );
 }
