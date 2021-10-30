@@ -51,6 +51,7 @@ const arrangeType = [
 function tours(props) {
   const [current, setCurrent] = React.useState(0);
   const [arrange, setArrange] = React.useState(arrangeType[0]);
+  const [geolocation, setGeolocation] = React.useState({mapX: 37.575869, mapY: 126.976859});
   const { loading, data, error } = useSelector((state: RootState) => state.tour.tours);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -63,6 +64,7 @@ function tours(props) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrent(newValue);
   };
+  
   useEffect(() => {
     if (token == null) {
       router.push('/login');
@@ -70,9 +72,25 @@ function tours(props) {
   }, [isLoggedIn, token]);
 
   useEffect(() => {
-    const req = { contentTypeId: tabs[current].contentTypeId, arrange: arrange.value };
-    dispatch(getTourList(req));
+    if(geolocation.mapX !== 0) {
+      const req = { 
+        contentTypeId: tabs[current].contentTypeId, 
+        arrange: arrange.value, 
+        mapX: geolocation.mapX, 
+        mapY: geolocation.mapY,
+      };
+      dispatch(getTourList(req));
+    }
   }, [dispatch, current, arrange]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setGeolocation({ 
+        mapX: position.coords.latitude, 
+        mapY: position.coords.longitude,
+      });
+    });
+  });
 
   return (
     <Box className="content-container" style={{ height: '100%', backgroundColor: 'white' }}>
