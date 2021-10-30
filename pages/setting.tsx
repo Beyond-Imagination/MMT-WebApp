@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Modal, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { getUser, loginUser, userActions } from '../store/user';
@@ -8,6 +8,8 @@ import { RootState } from '../store';
 import { Loading } from '../components/atoms';
 import RightArrow from '../static/right-arrow.svg';
 import NftModal from '../components/molecules/Setting/NftModal';
+import { BusinessException } from '../models/BusinessException';
+import NftSyncModal from '../components/molecules/Setting/NftSyncModal';
 
 export default function setting() {
   const { data: user } = useSelector((state: RootState) => state.user.users);
@@ -15,40 +17,12 @@ export default function setting() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
+  const [nftSync, setNftSync] = useState<boolean>(true);
   const handleClose = () => setOpen(false);
-  const [add, setAdd] = useState();
+
   useEffect(() => {
     dispatch(loginUser());
   }, []);
-
-  useEffect(() => {
-    console.log(klipSDK);
-    if (oauth.data !== null && !oauth.data.is_klip_linked) {
-      // SDK
-      const bappName = 'Moment';
-      const res = klipSDK.prepare.auth({ bappName }).then(value => {
-        klipSDK.request(value.request_key, () => alert('모바일 환경에서 실행해주세요'));
-        const interval = setInterval(
-          args =>
-            klipSDK.getResult(value.request_key).then(result => {
-              console.log('result: ', result.status);
-              if (result.status === 'completed') {
-                clearInterval(interval);
-                alert(`Address: ${result.result.klaytn_address}`);
-                setAdd(result.result.klaytn_address);
-              }
-            }),
-          3000,
-        );
-      });
-
-      if (res.err) {
-        // 에러 처리
-      } else if (res.request_key) {
-        // request_key 보관
-      }
-    }
-  }, [oauth.data]);
 
   useEffect(() => {
     if (token == null) {
@@ -62,9 +36,19 @@ export default function setting() {
     } else dispatch(getUser(''));
   }, [dispatch, isLoggedIn]);
 
+  useEffect(() => {}, [nftSync]);
+
+  const handleModal = () => {
+    if (oauth.data != null && !oauth.data.is_klip_linked && nftSync) {
+      return <NftSyncModal setNftSync={setNftSync} nftSync={nftSync} oauth={oauth} />;
+    }
+    return null;
+  };
+
   return (
     <>
       <Box sx={{ backgroundColor: 'white', width: '100%' }}>
+        {handleModal()}
         {!isLoggedIn || user == null ? (
           <Loading />
         ) : (
@@ -81,13 +65,16 @@ export default function setting() {
             <MenuBar
               title="지갑 주소 확인하기"
               onClick={() => {
-                setOpen(!open);
+                if (!oauth.data.is_klip_linked) setNftSync(true);
+                else {
+                  setOpen(!open);
+                }
               }}
             />
             <MenuBar
               title="NFT 토큰"
               onClick={() => {
-                setOpen(!open);
+                router.push('/nft');
               }}
             />
             <MenuBar
@@ -99,7 +86,6 @@ export default function setting() {
                 console.log('Removed!');
               }}
             />
-            <div>{`add: ${add}`}</div>
           </>
         )}
       </Box>
