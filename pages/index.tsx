@@ -1,24 +1,15 @@
-import { useSelector } from 'react-redux';
-
 import { useRouter } from 'next/router';
-
-import { useEffect } from 'react';
 import MapScreen from './Map';
-import { RootState } from '../store';
+import { Loading } from '../components/atoms';
+import useAuthenticated from '../hooks/useAuthenticated';
 
 function Home() {
   const router = useRouter();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/login');
-    }
-  }, []);
-  // if (token == null || token === '') router.push('/login');
+  const { isLoggedIn } = useAuthenticated();
 
   if (!isLoggedIn) {
-    return <div>Redirect to Login page...</div>;
+    return <Loading />;
   }
   return <MapScreen />;
 }

@@ -48,7 +48,7 @@ export default function MapScreen() {
   useAuthenticated();
   useEffect(() => {
     const wrap = async () => {
-      await updateLocation();
+      await fetchCurrentLocation();
       const params = new URLSearchParams(window.location.search);
       const lat = Number(params.get('lat'));
       const lng = Number(params.get('lng'));
@@ -84,7 +84,7 @@ export default function MapScreen() {
       const lat = Number(router.query.lat);
 
       const km = calculateDistanceFromLatLng(lat, lng, lastUpdatedCenter.lat, lastUpdatedCenter.lng);
-      if (km <= 1 && firstUpdatedLastCenter) {
+      if (km <= 0.6 && firstUpdatedLastCenter) {
         return;
       }
 
@@ -143,7 +143,7 @@ export default function MapScreen() {
 
   const updateLocation = async () => {
     await fetchCurrentLocation();
-    // await fetchLocation();
+    await fetchLocation();
   };
 
   const pushTo = (contentId, contentTypeId) => {
@@ -201,8 +201,9 @@ export default function MapScreen() {
       </button>
       <Map
         center={mapCenter}
-        style={{ width: '100%', height: '100%', zIndex: 1 }}
-        level={4}
+        className="fixed top-0 left-0"
+        style={{ width: '100vw', height: '100vh', zIndex: 1 }}
+        level={3}
         onDragEnd={(map, e) => onDragEnd(map, e)}
         onCreate={map => onCreatedMap(map)}
       >

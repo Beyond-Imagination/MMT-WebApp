@@ -17,4 +17,6 @@ export default function useAuthenticated() {
       router.push('/login');
     }
   }, [isLoggedIn, token]);
+
+  return { isLoggedIn };
 }

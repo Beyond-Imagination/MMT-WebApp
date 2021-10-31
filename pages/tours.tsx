@@ -94,7 +94,7 @@ function tours() {
 
   return (
     <div className="bg-white w-full h-full">
-      <TitleBar title="관광지 리스트" useBackBtn={false} />
+      <TitleBar title="내 주변 관광지 리스트" useBackBtn={false} />
       <Box sx={{ mb: 1 }}>
         <Tabs values={tabs} current={current} handleChange={handleChange} />
       </Box>
