@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import * as React from 'react';
+import Icon from '@mdi/react';
+import { mdiCrosshairsGps } from '@mdi/js';
 import MapCard from '../components/molecules/MapCard';
 import { RootState } from '../store';
 import { getTourList } from '../store/tour';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
-import * as React from "react";
-import delay from "../core/utils/delay";
+import { calculateDistanceFromLatLng } from '../helpers/geolocation';
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -35,11 +37,18 @@ export default function MapScreen() {
   const [kakaoMap, setKakaoMap] = useState<kakao.maps.Map>();
   const [initializedKakaoMap, setInitializedKakaoMap] = useState(false);
   const { mapCenter, setMapCenter, fetchLocation } = useLocation();
+  const { mapCenter: currentCenter, fetchLocation: fetchCurrentLocation } = useLocation();
+  const {
+    mapCenter: lastUpdatedCenter,
+    setMapCenter: setLastUpdatedCenter,
+    firstUpdated: firstUpdatedLastCenter,
+  } = useLocation();
   const { data } = useSelector((root: RootState) => root.tour.tours);
 
   useAuthenticated();
   useEffect(() => {
     const wrap = async () => {
+      await updateLocation();
       const params = new URLSearchParams(window.location.search);
       const lat = Number(params.get('lat'));
       const lng = Number(params.get('lng'));
@@ -54,6 +63,8 @@ export default function MapScreen() {
   useEffect(() => {
     if (firstUpdated && initializedKakaoMap) {
       kakaoMap.setCenter(new kakao.maps.LatLng(mapCenter.lat, mapCenter.lng));
+      const { basePath } = router;
+      router.replace(`${basePath}/Map?lat=${mapCenter.lat}&lng=${mapCenter.lng}`);
     }
   }, [firstUpdated, initializedKakaoMap]);
 
@@ -66,20 +77,29 @@ export default function MapScreen() {
 
   useEffect(() => {
     const wrap = async () => {
-      const { lng, lat } = router.query;
-      if (firstUpdated) {
-        await dispatch(
-          getTourList({
-            mapX: Number(lng),
-            mapY: Number(lat),
-            radius: 1500,
-            pageNo: 1,
-            numOfRows: 100,
-            overview: false,
-          }),
-        );
-        await setFirstUpdated(true);
+      if (!firstUpdated) {
+        return;
       }
+      const lng = Number(router.query.lng);
+      const lat = Number(router.query.lat);
+
+      const km = calculateDistanceFromLatLng(lat, lng, lastUpdatedCenter.lat, lastUpdatedCenter.lng);
+      if (km <= 1 && firstUpdatedLastCenter) {
+        return;
+      }
+
+      await setLastUpdatedCenter({ lat, lng });
+      await dispatch(
+        getTourList({
+          mapX: lng,
+          mapY: lat,
+          radius: 1500,
+          pageNo: 1,
+          numOfRows: 100,
+          overview: false,
+        }),
+      );
+      await setFirstUpdated(true);
     };
     wrap();
   }, [router.query]);
@@ -98,11 +118,18 @@ export default function MapScreen() {
     setItems(mapItems);
   }, [data]);
 
-  const toggleShow = (item: IMapItem) => {
+  const toggleShow = async (item: IMapItem) => {
     const index = items.findIndex(x => x.id === item.id);
+    const km = calculateDistanceFromLatLng(item.lat, item.lng, currentCenter.lat, currentCenter.lng).toFixed(2);
     item.show = !item.show;
+    item.distance = `${km} Km`;
 
-    setItems([...items.slice(0, index), item, ...items.slice(index + 1)]);
+    // await setMapCenter({ lat: item.lat, lng: item.lng });
+    await setItems([
+      ...items.slice(0, index).map((x: IMapItem) => ({ ...x, show: false })),
+      item,
+      ...items.slice(index + 1).map((x: IMapItem) => ({ ...x, show: false })),
+    ]);
   };
 
   const removeBackground = () => {
@@ -112,6 +139,11 @@ export default function MapScreen() {
       targetElement.style.border = 'none';
       targetElement.style.background = 'none';
     });
+  };
+
+  const updateLocation = async () => {
+    await fetchCurrentLocation();
+    // await fetchLocation();
   };
 
   const pushTo = (contentId, contentTypeId) => {
@@ -149,6 +181,7 @@ export default function MapScreen() {
       {item.show && (
         <MapCard
           imageUrl={item.imageUrl}
+          distance={item.distance}
           title={item.title}
           onClick={() => pushTo(item.id, item.contentTypeId)}
           show={item.show}
@@ -160,11 +193,11 @@ export default function MapScreen() {
   return (
     <div className="relative w-full h-full">
       <button
-        className="fixed right-6 bottom-16 w-10 h-10 z-20 rounded-full outline-none border-2"
+        className="fixed right-6 bottom-16 w-10 h-10 z-20 rounded-full outline-none"
         type="button"
-        onClick={() => fetchLocation()}
+        onClick={() => updateLocation()}
       >
-        <img className="w-10 h-10 mx-auto rounded-full bg-white outline-none" alt="gps icon" src="../static/gps.png" />
+        <Icon path={mdiCrosshairsGps} />
       </button>
       <Map
         center={mapCenter}

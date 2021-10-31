@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import Icon from '@mdi/react';
+import { mdiChevronLeft } from '@mdi/js';
 
 interface Props {
   title: string;
@@ -14,7 +16,7 @@ export default function TitleBar({ title, useBackBtn = true }: Props) {
     <div className="w-full relative h-15 text-center font-bold text-4xl px-3 py-3">
       {useBackBtn !== false && (
         <button className="absolute w-8 h-8 left-4" type="button" onClick={() => router.back()}>
-          <img className="w-3 h-5 mx-auto" src="../../static/back-btn-4.png" alt="back button" />
+          <Icon path={mdiChevronLeft} />
         </button>
       )}
       <Typography variant="h5" fontWeight={800}>
