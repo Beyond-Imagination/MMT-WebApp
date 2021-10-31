@@ -37,14 +37,7 @@ const TourDetail = () => {
     .map(str => <p key={nanoid()} className="text-xl leading-8" dangerouslySetInnerHTML={{ __html: str }} />);
 
   const onClickPublishNFT = () => {
-    alert('Publish NFT!');
-    const contentId = pid;
-    const title = 'title';
-    const weather = 'weather';
-    const impression = 'impression';
-    const image = 'image';
-    const req = { content_id: contentId, title, weather, impression, image };
-    callAPI('post', '/api/nft', req);
+    router.push(`/tours/createNft?contentId=${data.content_id}`);
   };
 
   return (
@@ -54,7 +47,7 @@ const TourDetail = () => {
       <button
         type="button"
         className="w-full py-4 text-xl font-bold text-white transition-colors transition-shadow bg-green-600 hover:bg-green-300 shadow-xl hover:shadow-2xl"
-        onClick={() => onClickPublishNFT}
+        onClick={() => onClickPublishNFT()}
       >
         NFT 발급
       </button>
