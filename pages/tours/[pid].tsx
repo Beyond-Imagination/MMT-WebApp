@@ -10,7 +10,6 @@ import TitleBar from '../../components/molecules/TitleBar';
 import ImageSlider from '../../components/molecules/ImageSlider';
 import useAuthenticated from '../../hooks/useAuthenticated';
 import InfoCard from '../../components/molecules/InfoCard';
-import callAPI from '../../helpers/apiCaller';
 
 const TourDetail = () => {
   const router = useRouter();
@@ -37,7 +36,7 @@ const TourDetail = () => {
     .map(str => <p key={nanoid()} className="text-xl leading-8" dangerouslySetInnerHTML={{ __html: str }} />);
 
   const onClickPublishNFT = () => {
-    router.push(`/tours/createNft?contentId=${data.content_id}`);
+    router.push(`/tours/createNft?contentId=${data.content_id}&contentTypeId=${data.content_type_id}`);
   };
 
   return (
