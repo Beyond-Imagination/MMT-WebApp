@@ -15,7 +15,7 @@ export async function login(token: string): Promise<IToken> {
   };
   const response = await axios({
     method: 'post',
-    url: 'http://api.moment.beyond-imagination.ml/api/users/login',
+    url: 'https://api.moment.beyond-imagination.ml/api/users/login',
     data: requestBody,
   });
   return response.data;

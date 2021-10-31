@@ -8,7 +8,7 @@ interface IApiResponse {
   success: boolean;
 }
 
-const BASE_URL = 'http://api.moment.beyond-imagination.ml';
+const BASE_URL = 'https://api.moment.beyond-imagination.ml';
 
 export default async function callAPI(method: 'get' | 'post' | 'put' | 'delete', endpoint: string, params?: any) {
   let url = `${BASE_URL}${endpoint}`;
