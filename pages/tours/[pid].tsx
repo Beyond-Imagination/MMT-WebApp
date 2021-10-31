@@ -10,6 +10,7 @@ import TitleBar from '../../components/molecules/TitleBar';
 import ImageSlider from '../../components/molecules/ImageSlider';
 import useAuthenticated from '../../hooks/useAuthenticated';
 import InfoCard from '../../components/molecules/InfoCard';
+import callAPI from '../../helpers/apiCaller';
 
 const TourDetail = () => {
   const router = useRouter();
@@ -37,6 +38,13 @@ const TourDetail = () => {
 
   const onClickPublishNFT = () => {
     alert('Publish NFT!');
+    const contentId = pid;
+    const title = 'title';
+    const weather = 'weather';
+    const impression = 'impression';
+    const image = 'image';
+    const req = { content_id: contentId, title, weather, impression, image };
+    callAPI('post', '/api/nft', req);
   };
 
   return (
