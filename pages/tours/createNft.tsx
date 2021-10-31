@@ -11,6 +11,7 @@ const createNft = () => {
   const [title, setTitle] = useState('');
   const [weather, setWeather] = useState('');
   const [impression, setImpression] = useState('');
+  const [emotion, setEmotion] = useState('');
   const [image, setImage] = useState('');
 
   const handleUploadClick = event => {
@@ -30,13 +31,7 @@ const createNft = () => {
   };
 
   const handleReg = () => {
-    const formData = new FormData();
-    formData.append('contentId', String(contentId));
-    formData.append('file', image);
-    formData.append('title', title);
-    formData.append('weather', weather);
-    formData.append('impression', impression);
-    const req = { contentId, file: image, title, weather, impression };
+    const req = { contentId, image, title, weather, impression, emotion };
 
     callAPI('post', '/api/nft', req);
   };
@@ -69,6 +64,15 @@ const createNft = () => {
         />
         <TextField
           sx={{ mb: 2 }}
+          label="감정"
+          variant="outlined"
+          value={emotion}
+          onChange={event => {
+            setEmotion(event.target.value);
+          }}
+        />
+        <TextField
+          sx={{ mb: 2 }}
           label="날씨"
           variant="outlined"
           value={weather}
@@ -86,7 +90,28 @@ const createNft = () => {
           }}
         />
         <div>
-          <input accept="image/*" id="contained-button-file" multiple type="file" onChange={() => {}} />
+          <input
+            accept="image/*"
+            id="contained-button-file"
+            type="file"
+            onChange={event => {
+              //   const arr = [];
+              //   for (let i = 0; i < event.target.files.length; i++) {
+              //     const formData = new FormData();
+              //     formData.append('image', event.target.files[i]);
+              //     callAPI('post', '/api/nft/image', formData).then(value => {
+              //       arr.push(value.image);
+              //     });
+              //     console.log(arr);
+              //   }
+              //   setImage(arr);
+              const formData = new FormData();
+              formData.append('image', event.target.files[0]);
+              callAPI('post', '/api/nft/image', formData).then(value => {
+                setImage(value.image);
+              });
+            }}
+          />
         </div>
       </Box>
       <Box
