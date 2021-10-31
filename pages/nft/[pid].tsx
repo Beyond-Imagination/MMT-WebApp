@@ -12,7 +12,12 @@ const NftDetail = () => {
   const router = useRouter();
   const { pid } = router.query;
   const dispatch = useDispatch();
-  const nft = useSelector((state: RootState) => nftActions.nftSelector(state));
+  const {data: nftList} = useSelector((state: RootState) => state.nft.nftList);
+
+  let nft;
+  if(nftList) {
+    nft = nftList.find(e => Number(e.nft_id) === Number(pid))
+  }
 
   useEffect(() => {
     // dispatch(newsActions.setSelected(parseQuery(location.search).id));

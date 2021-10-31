@@ -1,7 +1,7 @@
 export default interface INft {
   _id: string;
   contentId: number; // 관광지 contentid
-  nftId: number;
+  nft_id: number;
   image: string; // image link
   title: string;
   weather: string;

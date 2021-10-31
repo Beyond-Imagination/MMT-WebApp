@@ -41,8 +41,10 @@ export default function nft() {
   }, [isLoggedIn, token]);
 
   useEffect(() => {
-    dispatch(getNftList());
-  }, [dispatch]);
+    if(user) {
+      dispatch(nftActions.setNftList(user.nft_list));
+    }
+  });
 
   useEffect(() => {
     getUser();

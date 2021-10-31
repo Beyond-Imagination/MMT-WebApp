@@ -39,6 +39,9 @@ const nftSlice = createSlice({
     setSelected(state, action) {
       state.selected = action.payload;
     },
+    setNftList(state, action) {
+      state.nftList.data = action.payload;
+    }
   },
   extraReducers: {
     [getNftList.pending.type]: state => {

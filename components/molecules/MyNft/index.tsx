@@ -31,7 +31,7 @@ function NftCard(props: INftCard) {
   const { nftData, ...other } = props;
 
   return (
-    <Link href={`/nft/${nftData.nftId}`} key={nftData.nftId}>
+    <Link href={`/nft/${nftData.nft_id}`} key={nftData.nft_id}>
       <div className="w-full">
         <LazyLoadingImage
           src={nftData.image}
