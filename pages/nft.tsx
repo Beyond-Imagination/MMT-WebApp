@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { getUser } from '../store/user';
 import { MyNft, TabPanel, Tabs } from '../components/molecules';
 import { ITabProps } from '../components/molecules/Tabs';
 import { RootState } from '../store';
@@ -24,6 +25,7 @@ export default function nft() {
     setCurrent(newValue);
   };
   const { nftList } = useSelector((root: RootState) => root.nft);
+  const { data: user } = useSelector((state: RootState) => state.user.users);
   const dispatch = useDispatch();
   const router = useRouter();
   const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
@@ -42,14 +44,24 @@ export default function nft() {
     dispatch(getNftList());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      getUser(token);
+    } else {
+      dispatch(getUser(''));
+    }
+  }, [dispatch, isLoggedIn]);
+
   return (
     <div className="w-full bg-white">
       <Tabs values={tabs} current={current} handleChange={handleChange} />
-      {nftList.loading || nftList.data.length === 0 ? (
-        <Loading />
+      {!user || user.nft_list.length === 0 ? (
+        <div className="fixed left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%)' }}>
+          NFT 가 없습니다
+        </div>
       ) : (
         <TabPanel current={current} index={0}>
-          <MyNft nftList={nftList.data} />
+          <MyNft nftList={user.nft_list} />
         </TabPanel>
       )}
     </div>
