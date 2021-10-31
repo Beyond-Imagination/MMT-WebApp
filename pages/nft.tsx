@@ -11,13 +11,7 @@ import { getNftList, nftActions } from '../store/nft';
 
 import { Loading } from '../components/atoms';
 
-const tabs: ITabProps[] = [
-  { id: 1, title: '내 NFT' },
-  {
-    id: 2,
-    title: '내 뱃지',
-  },
-];
+const tabs: ITabProps[] = [{ id: 1, title: '내 NFT' }];
 
 export default function nft() {
   const [current, setCurrent] = useState(0);
@@ -41,7 +35,7 @@ export default function nft() {
   }, [isLoggedIn, token]);
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       dispatch(nftActions.setNftList(user.nft_list));
     }
   });
