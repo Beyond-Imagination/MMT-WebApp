@@ -47,7 +47,7 @@ export default function nft() {
   });
 
   useEffect(() => {
-    getUser();
+    dispatch(getUser());
   }, [dispatch, isLoggedIn]);
 
   return (
