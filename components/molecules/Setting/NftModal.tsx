@@ -20,13 +20,17 @@ const NftModal = ({ open, handleClose, klaytnAddres }: Prop) => {
             지갑 주소
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center', backgroundColor: '#EAEAEA', height: 32, mb: 2 }}>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', backgroundColor: '#EAEAEA', mb: 2 }}>
+          <Typography
+            id="modal-modal-description"
+            sx={{ wordWrap: 'break-word', pt: 1, pb: 1, pl: 2, pr: 2 }}
+            width="100%"
+          >
             {klaytnAddres}
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }} onClick={handleClose}>
-          <Typography id="modal-modal-title" variant="subtitle1" color="#C4D15F">
+          <Typography id="modal-modal-title" variant="subtitle1">
             종료
           </Typography>
         </Box>
@@ -36,6 +40,7 @@ const NftModal = ({ open, handleClose, klaytnAddres }: Prop) => {
 };
 const style = {
   position: 'absolute' as const,
+  outline: 'none',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUser, login } from '../../core/apis/user';
 import { IAsyncState } from '../../models/IAsyncState';
-import { IUser, ITokenApi } from '../../models/user/IUser';
+import { IUser, IToken } from '../../models/user/IUser';
 import useStorage from '../../hooks/useStorage';
+import { CommonApi } from '../../models/tour/ITour';
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'user';
@@ -18,7 +19,6 @@ export const getUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(`${name}/login`, async (_, thunkApi) => {
   const accessToken: string = useStorage().localStorage.getItem('KAKAO_ACCESS_TOKEN');
 
-  console.log('accessToken: ', accessToken);
   if (accessToken == null) {
     return thunkApi.rejectWithValue(false);
   }
@@ -31,7 +31,7 @@ export interface IUserState {
   users: IAsyncState<IUser>;
   token: string | null;
   isLoggedIn: boolean;
-  oauth: IAsyncState<ITokenApi>;
+  oauth: IAsyncState<IToken>;
 }
 
 // 4. reducer 초기값을 정의합니다.
@@ -73,12 +73,12 @@ const userSlice = createSlice({
     [loginUser.pending.type]: state => {
       state.users.loading = true;
     },
-    [loginUser.fulfilled.type]: (state, action: PayloadAction<ITokenApi>) => {
+    [loginUser.fulfilled.type]: (state, action: PayloadAction<CommonApi<IToken>>) => {
       state.users.loading = false;
       state.isLoggedIn = true;
-      state.oauth.data = action.payload;
+      state.oauth.data = action.payload.result;
     },
-    [loginUser.rejected.type]: (state, action: PayloadAction<ITokenApi>) => {
+    [loginUser.rejected.type]: (state, action: PayloadAction<IToken>) => {
       state.users.loading = false;
       state.isLoggedIn = false;
       state.token = null;

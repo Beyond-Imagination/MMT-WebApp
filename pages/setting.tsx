@@ -39,7 +39,12 @@ export default function setting() {
   useEffect(() => {}, [nftSync]);
 
   const handleModal = () => {
-    if (oauth.data != null && !oauth.data.is_klip_linked && nftSync) {
+    console.log('is_klip_linked: ', oauth.data?.is_klip_linked);
+    console.log('nftSync: ', nftSync);
+    console.log('user: ', user);
+    if (oauth.data != null && oauth.data.is_klip_linked !== undefined && !oauth.data.is_klip_linked && nftSync) {
+      console.log(oauth.data.is_klip_linked);
+      console.log(nftSync);
       return <NftSyncModal setNftSync={setNftSync} nftSync={nftSync} oauth={oauth} />;
     }
     return null;
@@ -48,7 +53,6 @@ export default function setting() {
   return (
     <>
       <Box sx={{ backgroundColor: 'white', width: '100%' }}>
-        {handleModal()}
         {!isLoggedIn || user == null ? (
           <Loading />
         ) : (
@@ -61,7 +65,7 @@ export default function setting() {
                 <Typography variant="h5">{user.nickname}</Typography>
               </Box>
             </Box>
-            <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_addres} />
+            <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_address} />
             <MenuBar
               title="지갑 주소 확인하기"
               onClick={() => {
@@ -89,6 +93,7 @@ export default function setting() {
           </>
         )}
       </Box>
+      {handleModal()}
     </>
   );
 }

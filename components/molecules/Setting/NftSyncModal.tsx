@@ -1,7 +1,12 @@
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Modal, Typography, Input } from '@mui/material';
 import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
 import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { BusinessException } from '../../../models/BusinessException';
+import callAPI from '../../../helpers/apiCaller';
+import { loginUser } from '../../../store/user';
 
 interface Prop {
   nftSync: boolean;
@@ -10,7 +15,7 @@ interface Prop {
 }
 const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
   const [add, setAdd] = useState();
-
+  const dispatch = useDispatch();
   const handlEKlipWallet = () => {
     if (oauth.data !== null && !oauth.data.is_klip_linked) {
       // SDK
@@ -38,16 +43,9 @@ const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
       }
     }
   };
-  return (
-    <Modal
-      open={nftSync}
-      onClose={() => {
-        setNftSync(false);
-      }}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={styles.container}>
+  const step1 = () => {
+    return (
+      <>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 6 }}>
           <Typography>Moment 서비스를 위해서는 Klip 연동이 필요합니다.</Typography>
         </Box>
@@ -59,13 +57,74 @@ const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
         >
           <Typography>카카오톡에서 Klip 연동하기</Typography>
         </Box>
-        <Box sx={styles.directKlip} onClick={() => {}}>
+        <Box
+          sx={styles.directKlip}
+          onClick={() => {
+            step2();
+          }}
+        >
           <Typography color="white">직접 Klip 연동하기</Typography>
         </Box>
         <Box sx={styles.close} onClick={() => setNftSync(false)}>
           <Typography color="black">닫기</Typography>
         </Box>
-      </Box>
+      </>
+    );
+  };
+
+  const step2 = () => {
+    return (
+      <>
+        <Box sx={{ mb: 2 }}>
+          <Typography variaht="subtitle1" fontWeight={800}>
+            Klip 주소 연동하기
+          </Typography>
+        </Box>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="body1">카카오톡에서 Klip 주소를 복하사하여 붙어넣어주세요.</Typography>
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            id="outlined-basic"
+            label="Klip 주소"
+            variant="outlined"
+            value={add}
+            onChange={event => {
+              setAdd(event.target.value);
+            }}
+          />
+        </Box>
+        <Box
+          sx={styles.close}
+          onClick={() => {
+            const req = { klaytn_address: add };
+            callAPI('post', '/api/users/klaytnAddress', req)
+              .then(value => {
+                alert('Klip 연동 성공');
+                dispatch(loginUser());
+                setNftSync(false);
+              })
+              .catch(e => {
+                throw new BusinessException(e);
+              });
+          }}
+        >
+          <Typography color="black">확인</Typography>
+        </Box>
+      </>
+    );
+  };
+
+  return (
+    <Modal
+      open={nftSync}
+      onClose={() => {
+        setNftSync(false);
+      }}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={styles.container}>{step1()}</Box>
     </Modal>
   );
 };
