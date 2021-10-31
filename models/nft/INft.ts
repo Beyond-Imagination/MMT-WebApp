@@ -7,6 +7,7 @@ export default interface INft {
   weather: string;
   emotion: string;
   impression: string;
+  tx_hash?: string;
 }
 
 export interface INftApi {

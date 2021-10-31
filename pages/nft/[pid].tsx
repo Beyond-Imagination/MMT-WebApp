@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import * as React from 'react';
@@ -28,6 +29,7 @@ const NftDetail = () => {
     return <Loading />;
   }
   return (
+    <Box style={{ overflow: 'scroll', height: '88%', paddingTop: 0 }}>
     <div className="w-full">
       <TitleBar title={nft.title} />
       <div className="w-full px-4">
@@ -48,8 +50,20 @@ const NftDetail = () => {
           <div className="font-bold text-2xl mb-2">날씨</div>
           <div>{nft.weather}</div>
         </div>
+
+        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
+          <div className="font-bold text-2xl mb-2">블록체인 네트워크</div>
+          <div>{"Klaytn Baobab Network"}</div>
+        </div>
+
+        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
+          <div className="font-bold text-2xl mb-2">tx hash</div>
+          <div>{`${nft.tx_hash.slice(0,6)}...${nft.tx_hash.slice(-7,-1)}`}</div>
+        </div>
       </div>
     </div>
+    </Box>
+    
   );
 };
 
