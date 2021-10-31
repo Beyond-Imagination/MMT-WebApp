@@ -100,8 +100,9 @@ function tours() {
       </Box>
       <Stack direction="row" spacing={0.5} sx={{ pl: 1, mb: 1 }}>
         {arrangeType.map(value => {
-          if (arrange.id === value.id)
-            return <Chip key={value.id} label={value.label} size="small" variant="filled" color="success" />;
+          if (arrange.id === value.id) {
+            return <Chip key={value.id} label={value.label} size="small" variant="filled" color="primary" />;
+          }
 
           return (
             <Chip
@@ -109,7 +110,7 @@ function tours() {
               label={value.label}
               size="small"
               variant="outlined"
-              onClick={event => {
+              onClick={() => {
                 setArrange(value);
               }}
             />
@@ -120,6 +121,10 @@ function tours() {
         <TabPanel current={current} index={current}>
           {loading || !updatedLocation ? (
             <Loading />
+          ) : data.length === 0 ? (
+            <div className="fixed left-1/2 top-1/2 text-lg font-bold" style={{ transform: 'translate(-50%, -50%)' }}>
+              항목이 없습니다.
+            </div>
           ) : (
             data.map(value => (
               <Link

@@ -10,6 +10,7 @@ import { RootState } from '../store';
 import { getNftList, nftActions } from '../store/nft';
 
 import { Loading } from '../components/atoms';
+import TitleBar from "../components/molecules/TitleBar";
 
 const tabs: ITabProps[] = [{ id: 1, title: '내 NFT' }];
 
@@ -46,9 +47,10 @@ export default function nft() {
 
   return (
     <div className="w-full bg-white">
+      <TitleBar title="NFT 엘범" useBackBtn={false} />
       <Tabs values={tabs} current={current} handleChange={handleChange} />
       {!user || user.nft_list.length === 0 ? (
-        <div className="fixed left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%)' }}>
+        <div className="fixed left-1/2 top-1/2 text-lg font-bold" style={{ transform: 'translate(-50%, -50%)' }}>
           NFT 가 없습니다
         </div>
       ) : (
