@@ -14,8 +14,9 @@ interface Prop {
   oauth: any;
 }
 const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
-  const [add, setAdd] = useState();
+  const [add, setAdd] = useState<string>('');
   const dispatch = useDispatch();
+  const [current, setCurrent] = useState<number>(1);
   const handlEKlipWallet = () => {
     if (oauth.data !== null && !oauth.data.is_klip_linked) {
       // SDK
@@ -60,7 +61,7 @@ const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
         <Box
           sx={styles.directKlip}
           onClick={() => {
-            step2();
+            setCurrent(2);
           }}
         >
           <Typography color="white">직접 Klip 연동하기</Typography>
@@ -76,7 +77,7 @@ const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
     return (
       <>
         <Box sx={{ mb: 2 }}>
-          <Typography variaht="subtitle1" fontWeight={800}>
+          <Typography variant="subtitle1" fontWeight={800}>
             Klip 주소 연동하기
           </Typography>
         </Box>
@@ -124,7 +125,7 @@ const NftSyncModal = ({ nftSync, setNftSync, oauth }: Prop) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={styles.container}>{step1()}</Box>
+      <Box sx={styles.container}>{current === 1 ? step1() : step2()}</Box>
     </Modal>
   );
 };

@@ -11,7 +11,7 @@ const name = 'user';
 // 2. 비동기 핸들링이 필요한 경우 createAsyncThunk 를 사용하여 처리합니다.
 export const getUser = createAsyncThunk(
   `${name}/getUser`, // name은 reducer이름  + / + 함수명으로 구성합니다.
-  async (token: string) => {
+  async () => {
     return fetchUser();
   },
 );

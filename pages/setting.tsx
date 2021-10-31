@@ -12,7 +12,7 @@ import { BusinessException } from '../models/BusinessException';
 import NftSyncModal from '../components/molecules/Setting/NftSyncModal';
 
 export default function setting() {
-  const { data: user } = useSelector((state: RootState) => state.user.users);
+  const { users } = useSelector((state: RootState) => state.user);
   const { token, isLoggedIn, oauth } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,6 +22,7 @@ export default function setting() {
 
   useEffect(() => {
     dispatch(loginUser());
+    dispatch(getUser());
   }, []);
 
   useEffect(() => {
@@ -30,21 +31,8 @@ export default function setting() {
     }
   }, [isLoggedIn, token]);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      getUser(oauth.data.access_token);
-    } else dispatch(getUser(''));
-  }, [dispatch, isLoggedIn]);
-
-  useEffect(() => {}, [nftSync]);
-
   const handleModal = () => {
-    console.log('is_klip_linked: ', oauth.data?.is_klip_linked);
-    console.log('nftSync: ', nftSync);
-    console.log('user: ', user);
     if (oauth.data != null && oauth.data.is_klip_linked !== undefined && !oauth.data.is_klip_linked && nftSync) {
-      console.log(oauth.data.is_klip_linked);
-      console.log(nftSync);
       return <NftSyncModal setNftSync={setNftSync} nftSync={nftSync} oauth={oauth} />;
     }
     return null;
@@ -53,19 +41,19 @@ export default function setting() {
   return (
     <>
       <Box sx={{ backgroundColor: 'white', width: '100%' }}>
-        {!isLoggedIn || user == null ? (
+        {!isLoggedIn || users.data == null ? (
           <Loading />
         ) : (
           <>
             <Box sx={{ display: 'flex', height: 140, alignItems: 'center', paddingLeft: 4 }}>
               <Box>
-                <Avatar src={user.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
+                <Avatar src={users.data.profile_image_uri} alt="" sx={{ width: 80, height: 80 }} />
               </Box>
               <Box sx={{ paddingLeft: 2 }}>
-                <Typography variant="h5">{user.nickname}</Typography>
+                <Typography variant="h5">{users.data.nickname}</Typography>
               </Box>
             </Box>
-            <NftModal handleClose={handleClose} open={open} klaytnAddres={user.klaytn_address} />
+            <NftModal handleClose={handleClose} open={open} klaytnAddres={users.data.klaytn_address} />
             <MenuBar
               title="지갑 주소 확인하기"
               onClick={() => {

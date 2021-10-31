@@ -3,12 +3,12 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { getUser } from '../store/user';
+import { getUser, loginUser } from '../store/user';
 import { MyNft, TabPanel, Tabs } from '../components/molecules';
 import { ITabProps } from '../components/molecules/Tabs';
 import { RootState } from '../store';
 import { getNftList, nftActions } from '../store/nft';
-import { loginUser } from '../store/user';
+
 import { Loading } from '../components/atoms';
 
 const tabs: ITabProps[] = [
@@ -45,11 +45,7 @@ export default function nft() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getUser(token);
-    } else {
-      dispatch(getUser(''));
-    }
+    getUser();
   }, [dispatch, isLoggedIn]);
 
   return (
