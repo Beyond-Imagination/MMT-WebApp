@@ -36,8 +36,9 @@ const createNft = () => {
     formData.append('title', title);
     formData.append('weather', weather);
     formData.append('impression', impression);
+    const req = { contentId, file: image, title, weather, impression };
 
-    callAPI('post', '/api/nft', formData);
+    callAPI('post', '/api/nft', req);
   };
   return (
     <Box
