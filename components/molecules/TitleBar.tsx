@@ -9,7 +9,7 @@ interface Props {
   useBackBtn?: boolean;
 }
 
-export default function TitleBar({ title, useBackBtn = true }: Props) {
+export default function TitleBar({ title, useBackBtn = true, ...rest }: Props) {
   const router = useRouter();
 
   return (

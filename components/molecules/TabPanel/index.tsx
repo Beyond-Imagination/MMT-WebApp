@@ -20,8 +20,8 @@ export default function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {current === index && (
-        <Box sx={{ pl: 2, pr: 2 }}>
-          <div>{children}</div>
+        <Box sx={{ pl: 2, pr: 2, height: '100%' }}>
+          <div className="w-full h-full">{children}</div>
         </Box>
       )}
     </div>
