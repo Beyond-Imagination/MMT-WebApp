@@ -32,132 +32,134 @@ const createNft = () => {
     callAPI('post', '/api/nft', req);
   };
   return (
-    <Box sx={{ pl: 3, pr: 3, pb: 2 }}>
+    <div>
       <TitleBar title="NFT 제출하기" />
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
-        {data ? (
-          <Typography variant="h6" fontWeight={800}>
-            {data?.title}
-          </Typography>
-        ) : (
-          <Skeleton variant="rectangular" width="100%" height={28} sx={{ mb: 1 }} />
-        )}
-      </Box>
-
-      {image ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src={image} alt="" style={{ backgroundSize: 'contain', height: 250 }} />
+      <div className="px-4">
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
+          {data ? (
+            <Typography variant="h6" fontWeight={800}>
+              {data?.title}
+            </Typography>
+          ) : (
+            <Skeleton variant="rectangular" width="100%" height={28} sx={{ mb: 1 }} />
+          )}
         </Box>
-      ) : (
+
+        {image ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src={image} alt="" style={{ backgroundSize: 'contain', height: 250 }} />
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              width: '100%',
+              borderStyle: 'dashed',
+              borderWidth: 3,
+              height: 250,
+              mb: 3,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            미리보기
+          </Box>
+        )}
+
+        <Box sx={{ mb: 2 }}>
+          <label
+            className="
+              w-full
+              flex flex-col
+              items-center
+              px-4
+              py-2
+              leading-4
+              bg-white
+              rounded-md
+              shadow-md
+              tracking-wide
+              uppercase
+              border border-blue
+              cursor-pointer
+              hover:bg-indigo-600 hover:text-white
+              text-indigo-600
+              ease-linear
+              transition-all
+              duration-150
+            "
+          >
+            <span className="mt-2 text-base leading-normal">이미지를 선택해주세요</span>
+            <input
+              type="file"
+              className="hidden"
+              accept="image/*"
+              id="contained-button-file"
+              onChange={event => {
+                const formData = new FormData();
+                formData.append('image', event.target.files[0]);
+                callAPI('post', '/api/nft/image', formData).then(value => {
+                  setImage(value.image);
+                });
+              }}
+            />
+          </label>
+        </Box>
         <Box
           sx={{
-            width: '100%',
-            borderStyle: 'dashed',
-            borderWidth: 3,
-            height: 250,
-            mb: 3,
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'column',
           }}
         >
-          미리보기
-        </Box>
-      )}
-
-      <Box sx={{ mb: 2 }}>
-        <div
-          className="
-            w-full
-            flex flex-col
-            items-center
-            px-4
-            py-2
-            leading-4
-            bg-white
-            rounded-md
-            shadow-md
-            tracking-wide
-            uppercase
-            border border-blue
-            cursor-pointer
-            hover:bg-indigo-600 hover:text-white
-            text-indigo-600
-            ease-linear
-            transition-all
-            duration-150
-          "
-        >
-          <span className="mt-2 text-base leading-normal">이미지를 선택해주세요</span>
-          <input
-            type="file"
-            className="hidden"
-            accept="image/*"
-            id="contained-button-file"
+          <TextField
+            sx={{ mb: 2 }}
+            label="제목"
+            variant="outlined"
+            value={title}
             onChange={event => {
-              const formData = new FormData();
-              formData.append('image', event.target.files[0]);
-              callAPI('post', '/api/nft/image', formData).then(value => {
-                setImage(value.image);
-              });
+              setTitle(event.target.value);
             }}
           />
-        </div>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <TextField
-          sx={{ mb: 2 }}
-          label="제목"
-          variant="outlined"
-          value={title}
-          onChange={event => {
-            setTitle(event.target.value);
+          <TextField
+            sx={{ mb: 2 }}
+            label="감정"
+            variant="outlined"
+            value={emotion}
+            onChange={event => {
+              setEmotion(event.target.value);
+            }}
+          />
+          <TextField
+            sx={{ mb: 2 }}
+            label="날씨"
+            variant="outlined"
+            value={weather}
+            onChange={event => {
+              setWeather(event.target.value);
+            }}
+          />
+          <TextField
+            sx={{ mb: 2 }}
+            label="소감"
+            variant="outlined"
+            value={impression}
+            onChange={event => {
+              setImpression(event.target.value);
+            }}
+          />
+        </Box>
+        <Button
+          onClick={() => {
+            handleReg();
+            router.push(`/tours/${contentId}?contentTypeId=${contentTypeId}`);
           }}
-        />
-        <TextField
-          sx={{ mb: 2 }}
-          label="감정"
-          variant="outlined"
-          value={emotion}
-          onChange={event => {
-            setEmotion(event.target.value);
-          }}
-        />
-        <TextField
-          sx={{ mb: 2 }}
-          label="날씨"
-          variant="outlined"
-          value={weather}
-          onChange={event => {
-            setWeather(event.target.value);
-          }}
-        />
-        <TextField
-          sx={{ mb: 2 }}
-          label="소감"
-          variant="outlined"
-          value={impression}
-          onChange={event => {
-            setImpression(event.target.value);
-          }}
-        />
-      </Box>
-      <Button
-        onClick={() => {
-          handleReg();
-          router.push(`/tours/${contentId}?contentTypeId=${contentTypeId}`);
-        }}
-        sx={{ width: '100%' }}
-      >
-        <Typography>제출하기</Typography>
-      </Button>
-      <div className="mb-20" />
-    </Box>
+          sx={{ width: '100%' }}
+        >
+          <Typography>제출하기</Typography>
+        </Button>
+        <div className="pb-20" />
+      </div>
+    </div>
   );
 };
 
