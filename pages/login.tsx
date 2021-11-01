@@ -33,11 +33,11 @@ export default function loginScreen() {
     const result = await loginWithKakao();
     useStorage().localStorage.setItem('KAKAO_ACCESS_TOKEN', result);
 
-    const loginResult = await callAPI('post', '/api/users/login', {
+    const { is_klip_linked: isKlipLinked } = await callAPI('post', '/api/users/login', {
       access_token: result,
     });
 
-    dispatch(userActions.saveToken(loginResult));
+    dispatch(userActions.setUser(isKlipLinked));
   };
 
   useEffect(() => {

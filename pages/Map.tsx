@@ -11,6 +11,7 @@ import { getTourList } from '../store/tour';
 import useAuthenticated from '../hooks/useAuthenticated';
 import useLocation from '../hooks/useLocation';
 import { calculateDistanceFromLatLng } from '../helpers/geolocation';
+import { Loading } from "../components/atoms";
 
 const infoWindowStyle: React.CSSProperties = {
   background: 'none',
@@ -45,7 +46,7 @@ export default function MapScreen() {
   } = useLocation();
   const { data } = useSelector((root: RootState) => root.tour.tours);
 
-  useAuthenticated();
+  const { fetchedAuth } = useAuthenticated();
   useEffect(() => {
     const wrap = async () => {
       await fetchCurrentLocation();
@@ -162,6 +163,10 @@ export default function MapScreen() {
     };
     wrap();
   };
+
+  if (!fetchedAuth) {
+    return <Loading />;
+  }
 
   const MapMarkerList = items.map((item: IMapItem) => (
     <MapMarker

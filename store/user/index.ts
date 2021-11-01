@@ -31,6 +31,7 @@ export interface IUserState {
   users: IAsyncState<IUser>;
   token: string | null;
   isLoggedIn: boolean;
+  isKlipLinked: boolean;
   oauth: IAsyncState<IToken>;
 }
 
@@ -42,6 +43,7 @@ const initialState: IUserState = {
   },
   token: '',
   isLoggedIn: false,
+  isKlipLinked: false,
   oauth: {
     data: null,
     loading: false,
@@ -54,8 +56,8 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    saveToken: (state, action) => {
-      state.token = action.payload;
+    setUser: (state, action) => {
+      state.isKlipLinked = action.payload;
       state.isLoggedIn = true;
     },
     logout: state => {

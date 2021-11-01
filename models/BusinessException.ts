@@ -11,3 +11,4 @@ class BusinessException {
 }
 
 export { BusinessException };
+export default BusinessException;

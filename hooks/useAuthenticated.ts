@@ -1,22 +1,42 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { RootState } from '../store';
 import { loginUser } from '../store/user';
 
 export default function useAuthenticated() {
-  const { isLoggedIn, token } = useSelector((state: RootState) => state.user);
+  const [fetchedAuth, setFetchedAuth] = useState(false);
+  const { isLoggedIn, isKlipLinked } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(loginUser());
+    const wrap = async () => {
+      try {
+        await setFetchedAuth(false);
+        await dispatch(loginUser());
+      } catch (e) {
+        await router.push('/login');
+      } finally {
+        setFetchedAuth(true);
+      }
+    };
+    wrap();
   }, []);
-  useEffect(() => {
-    if (token === null) {
-      router.push('/login');
-    }
-  }, [isLoggedIn, token]);
 
-  return { isLoggedIn };
+  useEffect(() => {
+    const wrap = () => {
+      if (!isLoggedIn) {
+        router.push('/login');
+      }
+
+      // if (!isKlipLinked) {
+      //   return router.push('/linkKlip');
+      // }
+    };
+
+    wrap();
+  }, [isLoggedIn]);
+
+  return { isLoggedIn, fetchedAuth, isKlipLinked };
 }

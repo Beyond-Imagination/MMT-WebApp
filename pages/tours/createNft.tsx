@@ -32,7 +32,6 @@ const createNft = () => {
 
   const handleReg = () => {
     const req = { contentId, image, title, weather, impression, emotion };
-
     callAPI('post', '/api/nft', req);
   };
   return (
@@ -40,7 +39,6 @@ const createNft = () => {
       sx={{
         pl: 3,
         pr: 3,
-
         pb: 2,
       }}
     >

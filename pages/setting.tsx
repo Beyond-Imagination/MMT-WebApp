@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Avatar, Box, Modal, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import { getUser, loginUser, userActions } from '../store/user';
 import { RootState } from '../store';
 import { Loading } from '../components/atoms';
 import RightArrow from '../static/right-arrow.svg';
 import NftModal from '../components/molecules/Setting/NftModal';
-import { BusinessException } from '../models/BusinessException';
 import NftSyncModal from '../components/molecules/Setting/NftSyncModal';
 
 export default function setting() {

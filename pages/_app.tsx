@@ -1,12 +1,14 @@
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProps } from 'next/app';
+import { NotificationContainer } from 'react-notifications';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import SettingIcon from '@mui/icons-material/Settings';
+import 'react-notifications/lib/notifications.css';
 
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -67,6 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </BottomNavigation>
           </Paper>
         </div>
+        <NotificationContainer />
       </QueryClientProvider>
     </Provider>
   );
