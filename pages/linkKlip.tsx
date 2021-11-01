@@ -1,10 +1,7 @@
-import { useEffect } from 'react';
 import { NotificationManager } from 'react-notifications';
 import { useDispatch } from 'react-redux';
 import useKlip from '../hooks/useKlip';
 import callAPI from '../helpers/apiCaller';
-import { loginUser } from '../store/user';
-import { BusinessException } from '../models/BusinessException';
 
 export default function LinkKlipScreen() {
   const dispatch = useDispatch();

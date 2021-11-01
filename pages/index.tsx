@@ -1,17 +1,20 @@
 import { useRouter } from 'next/router';
-import MapScreen from './Map';
+import { useEffect } from 'react';
 import { Loading } from '../components/atoms';
 import useAuthenticated from '../hooks/useAuthenticated';
 
 function Home() {
+  const { isLoggedIn } = useAuthenticated();
   const router = useRouter();
 
-  const { isLoggedIn } = useAuthenticated();
+  useEffect(() => {
+    router.push('/Map');
+  }, [isLoggedIn]);
 
   if (!isLoggedIn) {
     return <Loading />;
   }
-  return <MapScreen />;
+  return <></>;
 }
 
 export default Home;

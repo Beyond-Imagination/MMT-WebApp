@@ -4,6 +4,7 @@ import { IAsyncState } from '../../models/IAsyncState';
 import INft, { INftApi } from '../../models/nft/INft';
 import { fetchNftList } from '../../core/apis/nft';
 import { RootState } from '../index';
+import callAPI from "../../helpers/apiCaller";
 
 // 1. reducer 네임을 정의합니다. 이름은 폴더명과 동일하게 구성하고 상위 depth가 있을경우 상위depth/폴더명 의 형식으로 구성합니다.
 const name = 'nft';
@@ -12,7 +13,7 @@ const name = 'nft';
 export const getNftList = createAsyncThunk(
   `${name}/getNftList`, // name은 reducer이름  + / + 함수명으로 구성합니다.
   async () => {
-    return fetchNftList();
+    return callAPI('get', '/api/nft');
   },
 );
 
@@ -41,7 +42,7 @@ const nftSlice = createSlice({
     },
     setNftList(state, action) {
       state.nftList.data = action.payload;
-    }
+    },
   },
   extraReducers: {
     [getNftList.pending.type]: state => {

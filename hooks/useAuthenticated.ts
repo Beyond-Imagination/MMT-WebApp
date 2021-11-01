@@ -2,21 +2,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { RootState } from '../store';
-import { loginUser } from '../store/user';
+import { userActions } from '../store/user';
+import callAPI from '../helpers/apiCaller';
+import useStorage from './useStorage';
 
 export default function useAuthenticated() {
   const [fetchedAuth, setFetchedAuth] = useState(false);
-  const { isLoggedIn, isKlipLinked } = useSelector((state: RootState) => state.user);
+  const { isLoggedIn } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  function toLogin() {
+    if (router.pathname.toLowerCase() !== '/login') {
+      router.push('/login');
+    }
+  }
 
   useEffect(() => {
     const wrap = async () => {
       try {
         await setFetchedAuth(false);
-        await dispatch(loginUser());
+        const accessToken: string = useStorage().localStorage.getItem('KAKAO_ACCESS_TOKEN');
+        const { is_klip_linked: isKlipLinked } = await callAPI('post', '/api/users/login', {
+          access_token: accessToken,
+        });
+
+        await dispatch(userActions.setUser(isKlipLinked));
       } catch (e) {
-        await router.push('/login');
+        console.log(e);
+        toLogin();
       } finally {
         setFetchedAuth(true);
       }
@@ -25,18 +39,10 @@ export default function useAuthenticated() {
   }, []);
 
   useEffect(() => {
-    const wrap = () => {
-      if (!isLoggedIn) {
-        router.push('/login');
-      }
+    if (!isLoggedIn && fetchedAuth) {
+      toLogin();
+    }
+  }, [isLoggedIn, fetchedAuth]);
 
-      // if (!isKlipLinked) {
-      //   return router.push('/linkKlip');
-      // }
-    };
-
-    wrap();
-  }, [isLoggedIn]);
-
-  return { isLoggedIn, fetchedAuth, isKlipLinked };
+  return { isLoggedIn, fetchedAuth };
 }

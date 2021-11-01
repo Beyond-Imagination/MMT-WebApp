@@ -7,6 +7,7 @@ import callAPI from '../../helpers/apiCaller';
 import TitleBar from '../../components/molecules/TitleBar';
 import { RootState } from '../../store';
 import { getTourDetail } from '../../store/tour';
+import useKlip from '../../hooks/useKlip';
 
 const createNft = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const createNft = () => {
   const [emotion, setEmotion] = useState('');
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
+  useKlip();
 
   useEffect(() => {
     console.log('router.query: ', router.query);
@@ -27,8 +29,6 @@ const createNft = () => {
       dispatch(getTourDetail({ tourId: Number(contentId), contentTypeId: Number(contentTypeId) }));
     }
   }, [dispatch, contentId]);
-
-  useEffect(() => {}, [router.isReady]);
 
   const handleReg = () => {
     const req = { contentId, image, title, weather, impression, emotion };
@@ -80,16 +80,6 @@ const createNft = () => {
           id="contained-button-file"
           type="file"
           onChange={event => {
-            //   const arr = [];
-            //   for (let i = 0; i < event.target.files.length; i++) {
-            //     const formData = new FormData();
-            //     formData.append('image', event.target.files[i]);
-            //     callAPI('post', '/api/nft/image', formData).then(value => {
-            //       arr.push(value.image);
-            //     });
-            //     console.log(arr);
-            //   }
-            //   setImage(arr);
             const formData = new FormData();
             formData.append('image', event.target.files[0]);
             callAPI('post', '/api/nft/image', formData).then(value => {
@@ -144,7 +134,6 @@ const createNft = () => {
       <Button
         onClick={() => {
           handleReg();
-          alert('제출 성공');
           router.push(`/tours/${contentId}?contentTypeId=${contentTypeId}`);
         }}
         sx={{ width: '100%' }}
