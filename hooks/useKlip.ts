@@ -16,7 +16,7 @@ export default function useKlip() {
 
           interval = setInterval(async () => {
             retry += 1;
-            if (retry >= 5) {
+            if (retry >= 20) {
               clearInterval(interval);
               reject(new Error('Timeout!'));
             }
@@ -31,7 +31,7 @@ export default function useKlip() {
               clearInterval(interval);
               reject(e);
             }
-          }, 1000);
+          }, 3000);
         });
       } catch (e) {
         reject(e);
