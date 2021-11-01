@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { getNftList } from '../../store/nft';
 import { Loading } from '../../components/atoms';

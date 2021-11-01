@@ -22,9 +22,6 @@ const createNft = () => {
   useKlip();
 
   useEffect(() => {
-    console.log('router.query: ', router.query);
-    console.log(contentId);
-    console.log('useEffect');
     if (Number(contentId)) {
       dispatch(getTourDetail({ tourId: Number(contentId), contentTypeId: Number(contentTypeId) }));
     }
@@ -35,13 +32,7 @@ const createNft = () => {
     callAPI('post', '/api/nft', req);
   };
   return (
-    <Box
-      sx={{
-        pl: 3,
-        pr: 3,
-        pb: 2,
-      }}
-    >
+    <Box sx={{ pl: 3, pr: 3, pb: 2 }}>
       <TitleBar title="NFT 제출하기" />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
         {data ? (
@@ -75,18 +66,43 @@ const createNft = () => {
       )}
 
       <Box sx={{ mb: 2 }}>
-        <input
-          accept="image/*"
-          id="contained-button-file"
-          type="file"
-          onChange={event => {
-            const formData = new FormData();
-            formData.append('image', event.target.files[0]);
-            callAPI('post', '/api/nft/image', formData).then(value => {
-              setImage(value.image);
-            });
-          }}
-        />
+        <div
+          className="
+            w-full
+            flex flex-col
+            items-center
+            px-4
+            py-2
+            leading-4
+            bg-white
+            rounded-md
+            shadow-md
+            tracking-wide
+            uppercase
+            border border-blue
+            cursor-pointer
+            hover:bg-indigo-600 hover:text-white
+            text-indigo-600
+            ease-linear
+            transition-all
+            duration-150
+          "
+        >
+          <span className="mt-2 text-base leading-normal">이미지를 선택해주세요</span>
+          <input
+            type="file"
+            className="hidden"
+            accept="image/*"
+            id="contained-button-file"
+            onChange={event => {
+              const formData = new FormData();
+              formData.append('image', event.target.files[0]);
+              callAPI('post', '/api/nft/image', formData).then(value => {
+                setImage(value.image);
+              });
+            }}
+          />
+        </div>
       </Box>
       <Box
         sx={{
@@ -96,7 +112,7 @@ const createNft = () => {
       >
         <TextField
           sx={{ mb: 2 }}
-          label="타이틀"
+          label="제목"
           variant="outlined"
           value={title}
           onChange={event => {
@@ -140,6 +156,7 @@ const createNft = () => {
       >
         <Typography>제출하기</Typography>
       </Button>
+      <div className="mb-20" />
     </Box>
   );
 };
