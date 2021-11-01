@@ -44,32 +44,34 @@ const NftDetail = () => {
         <LazyLoadingImage src={nft.image} className="w-full mt-4 shadow-2xl rounded-lg" />
       </div>
       <div className="px-4 mt-4">
-        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
-          <div className="font-bold text-2xl mb-2">소감</div>
-          <div>{nft.impression}</div>
+        <div className="shadow rounded mb-4 py-4 px-4">
+          <div className="font-bold text-xl mb-2">소감</div>
+          <div className="text-gray-600">{nft.impression}</div>
         </div>
 
-        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
-          <div className="font-bold text-2xl mb-2">기분</div>
-          <div>{nft.emotion}</div>
+        <div className="shadow rounded mb-4 py-4 px-4">
+          <div className="font-bold text-xl mb-2">기분</div>
+          <div className="text-gray-600">{nft.emotion}</div>
         </div>
 
-        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
-          <div className="font-bold text-2xl mb-2">날씨</div>
-          <div>{nft.weather}</div>
+        <div className="shadow rounded mb-4 py-4 px-4">
+          <div className="font-bold text-xl mb-2">날씨</div>
+          <div className="text-gray-600">{nft.weather}</div>
         </div>
 
-        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
-          <div className="font-bold text-2xl mb-2">블록체인 네트워크</div>
-          <div>Klaytn Baobab Network</div>
-        </div>
-
-        <div className="shadow-lg rounded-lg mb-4 py-4 px-4">
-          <div className="font-bold text-2xl mb-2">tx hash</div>
-          <div>{`${nft.tx_hash.slice(0, 6)}...${nft.tx_hash.slice(-7, -1)}`}</div>
+        <div className="shadow rounded mb-4 py-4 px-4">
+          <div className="font-bold text-xl mb-2">블록체인 정보</div>
+          <div className="mb-4">
+            <div className="text-lg">네트워크</div>
+            <div className="text-sm font-bold text-gray-600">Klaytn Baobab Network</div>
+          </div>
+          <div>
+            <div className="text-lg">tx hash</div>
+            <div className="text-sm font-bold text-gray-600">{`${nft.tx_hash.slice(0, 6)}...${nft.tx_hash.slice(-7, -1)}`}</div>
+          </div>
         </div>
       </div>
-      <div className="pb-40" />
+      <div className="pb-20" />
     </div>
   );
 };

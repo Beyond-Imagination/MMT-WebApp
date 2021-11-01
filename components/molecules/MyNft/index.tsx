@@ -12,7 +12,7 @@ export default function MyNft(props: MyNftProps) {
   const { nftList } = props;
 
   return (
-    <div className="py-4 px-4 flex flex-wrap box-border h-full overflow-y-scroll">
+    <div className="py-4 px-4 flex flex-wrap box-border h-full">
       <div className="grid grid-cols-3 gap-2 w-full h-full">
         {nftList.map(nftData => (
           <NftCard nftData={nftData} key={nanoid()} />

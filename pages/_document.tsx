@@ -40,7 +40,7 @@ class MyDocument extends Document {
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js" />
           <script src="https://dl.klipwallet.com/sdk/klipSDK-2.0.1.min.js" />
         </Head>
-        <body className="container mx-auto flex justify-center items-center w-full h-full">
+        <body className="max-w-lg mx-auto flex justify-center items-center w-full h-full">
           <div className="w-full h-full">
             <Main />
             <NextScript />
