@@ -18,13 +18,11 @@ export default function nft() {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrent(newValue);
   };
-  const dispatch = useDispatch();
   const { isLoggedIn, isKlipLinked } = useKlip();
 
   useEffect(() => {
     const wrap = async () => {
       if (isLoggedIn && isKlipLinked) {
-        await dispatch(getNftList());
         const result = await fetchUser();
         setUser(result);
       }

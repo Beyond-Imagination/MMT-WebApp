@@ -20,17 +20,17 @@ export default function InfoCard({ title, items }: Props) {
 
   return (
     <>
-      <h3 className="text-2xl font-bold mb-2">{title}</h3>
-      <div className="w-full px-4 py-4 rounded-lg shadow-lg">
+      <h3 className="text-xl font-bold text-center">{title}</h3>
+      <div className="w-full px-4 py-4 rounded shadow-sm">
         {targetItems.length > 0 &&
           targetItems.map((x, index, arr) => (
             <div key={nanoid()}>
-              <h3 className="text-xl font-bold mb-2">{x.title}</h3>
+              <h3 className="text-md font-bold mb-2">{x.title}</h3>
               <div
                 className={
                   index !== arr.length - 1
-                    ? 'mb-4 md:mb-6 lg:mb-8 overflow-hidden truncate'
-                    : 'overflow-hidden truncate'
+                    ? 'mb-4 md:mb-6 lg:mb-8 overflow-hidden truncate text-gray-600'
+                    : 'overflow-hidden truncate text-gray-600'
                 }
                 dangerouslySetInnerHTML={{ __html: x.content }}
               />

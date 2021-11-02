@@ -46,7 +46,7 @@ const createNft = () => {
         </Box>
 
         {image ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', mb: 3, justifyContent: 'center', alignItems: 'center' }}>
             <img src={image} alt="" style={{ backgroundSize: 'contain', height: 250 }} />
           </Box>
         ) : (
@@ -89,15 +89,16 @@ const createNft = () => {
               duration-150
             "
           >
-            <span className="mt-2 text-base leading-normal">이미지를 선택해주세요</span>
+            <span className="text-base leading-normal">이미지를 선택해주세요</span>
             <input
               type="file"
               className="hidden"
               accept="image/*"
               id="contained-button-file"
               onChange={event => {
+                const imageFile = event.target.files[0];
                 const formData = new FormData();
-                formData.append('image', event.target.files[0]);
+                formData.append('image', imageFile);
                 callAPI('post', '/api/nft/image', formData).then(value => {
                   setImage(value.image);
                 });

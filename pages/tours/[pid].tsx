@@ -50,10 +50,12 @@ const TourDetail = () => {
       >
         NFT 발급
       </button>
-      <div className="px-4 py-4">
+      <div className="px-2 py-2">
         <section className="mb-4">
-          <h3 className="text-2xl font-bold mb-2">개요</h3>
-          {overViewParagraphs}
+          <h3 className="text-2xl font-bold text-center">개요</h3>
+          <div className="w-full px-4 py-4 rounded shadow-sm text-gray-600">
+            {overViewParagraphs}
+          </div>
         </section>
 
         <section className="mb-4">
